@@ -18,7 +18,11 @@ public class CardPresenter : MonoBehaviour
         m_model.OnScoreChanged += HandleOnScoreChanged;
     }
 
-    private void OnDisable() => m_model.OnScoreChanged -= HandleOnScoreChanged;
+    private void OnDisable()
+    {
+        if (m_model != null)
+            m_model.OnScoreChanged -= HandleOnScoreChanged;
+    }
 
     private void HandleOnScoreChanged(object sender, int e)
     {
