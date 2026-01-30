@@ -1,12 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private CardPresenter m_test;
+    [SerializeField] private HandPresenter m_handPresenter;
     [SerializeField] private CardData m_data;
 
     public void Awake()
     {
-        m_test.Initialize(new CardModel(m_data));
+        HandModel handModel = new HandModel(5);
+        m_handPresenter.Initialize(handModel);
+
+        CardModel card = new CardModel(m_data);
+        handModel.DrawCards(new List<CardModel>() { card, card, card, card, card });
     }
 }
