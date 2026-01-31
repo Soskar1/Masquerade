@@ -11,6 +11,7 @@ public class ManaModel
         set
         {
             if (value < 0) value = 0;
+            if (value > m_maxMana) value = m_maxMana;
 
             m_currentMana = value;
             
@@ -39,4 +40,6 @@ public class ManaModel
         m_maxMana = mana;
         m_currentMana = mana;
     }
+
+    public void Restore() => CurrentMana = MaxMana;
 }

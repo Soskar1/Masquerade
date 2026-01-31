@@ -12,7 +12,12 @@ public class ManaPresenter : MonoBehaviour
     {
         m_currentMana = new List<GameObject>();
         m_manaModel = model;
-        DisplayMana(m_manaModel.CurrentMana);
+
+        for (int i = 0; i < m_manaModel.MaxMana; ++i)
+        {
+            GameObject instance = Instantiate(m_manaPrefab, transform);
+            m_currentMana.Add(instance);
+        }
 
         // TODO
         // m_manaModel.OnManaChanged += HandleOnManaChanged;
@@ -25,15 +30,15 @@ public class ManaPresenter : MonoBehaviour
 
     private void HandleOnManaChanged(object sender, OnManaChangedEventArgs e)
     {
-        DisplayMana(e.CurrentMana);
+        DisplayMana(e.CurrentMana, e.MaxMana);
     }
 
-    private void DisplayMana(int currentMana)
+    private void DisplayMana(int currentMana, int maxMana)
     {
         for (int i = 0; i < currentMana; ++i)
-        {
-            GameObject instance = Instantiate(m_manaPrefab, transform);
-            m_currentMana.Add(instance);
-        }
+            m_currentMana[i].gameObject.SetActive(true);
+
+        for (int i = currentMana; i < maxMana; ++i)
+            m_currentMana[i].gameObject.SetActive(false);
     }
 }

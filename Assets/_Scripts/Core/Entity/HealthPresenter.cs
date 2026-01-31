@@ -34,9 +34,10 @@ public class HealthPresenter : MonoBehaviour
     public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
         // TODO
-        // m_healthBar.fillAmount = currentHealth / maxHealth;
+        if (m_healthBar != null)
+            m_healthBar.fillAmount = currentHealth / maxHealth;
 
-        // if (m_text != null)
-            // m_text.text = $"{currentHealth}/{maxHealth}";
+        if (m_text != null)
+            m_text.text = $"{currentHealth}/{maxHealth}";
     }
 }

@@ -20,16 +20,25 @@ public class HandPresenter : MonoBehaviour
     private List<CardPresenter> m_cardsInHand;
     private HandModel m_handModel;
     private BoardModel m_boardModel;
+    private ManaModel m_manaModel;
+    private BattleModel m_battleModel;
 
     private bool m_displayCardHover;
     private bool m_reactToMouseInput;
     private bool m_isHoverAnimationEnabled;
 
-    public void Initialize(HandModel model, BoardModel boardModel, bool hideCards = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
+    private bool m_canPlayCards = false;
+
+    public void Initialize(HandModel model, BoardModel boardModel, ManaModel manaModel, BattleModel battleModel, bool hideCards = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
     {
         m_handModel = model;
         m_boardModel = boardModel;
+        m_manaModel = manaModel;
+        m_battleModel = battleModel;
         m_handModel.OnCardAdded += HandleOnCardAdded;
+        m_handModel.OnCardRemoved += HandleOnCardRemoved;
+        m_battleModel.OnTurnStarted += HandleOnTurnStarted;
+        m_battleModel.OnTurnEnded += HandleOnTurnEnded;
         m_cardsInHand = new List<CardPresenter>();
 
         m_displayCardHover = hideCards;
@@ -37,9 +46,32 @@ public class HandPresenter : MonoBehaviour
         m_isHoverAnimationEnabled = isHoverAnimationEnabled;
     }
 
+    private void HandleOnTurnStarted(object sender, System.EventArgs e)
+    {
+        m_canPlayCards = true;
+    }
+
+    private void HandleOnTurnEnded(object sender, System.EventArgs e)
+    {
+        m_canPlayCards = false;
+    }
+
+    private void HandleOnCardRemoved(object sender, CardModel card)
+    {
+        m_handModel.OnCardAdded -= HandleOnCardRemoved;
+
+        CardPresenterRegistry.TryGet(card, out CardPresenter presenter);
+        m_cardsInHand.Remove(presenter);
+
+        AnimateRelayout();
+    }
+
     private void OnDisable()
     {
         m_handModel.OnCardAdded -= HandleOnCardAdded;
+        m_handModel.OnCardRemoved -= HandleOnCardRemoved;
+        m_battleModel.OnTurnStarted -= HandleOnTurnStarted;
+        m_battleModel.OnTurnEnded -= HandleOnTurnEnded;
     }
 
     private void HandleOnCardAdded(object sender, CardModel model)
@@ -68,12 +100,18 @@ public class HandPresenter : MonoBehaviour
 
     private void HandleOnCardClicked(object sender, CardPresenter card)
     {
+        if (!m_canPlayCards)
+            return;
+
+        if (m_manaModel.CurrentMana < card.Model.CurrentCost)
+            return;
+
         card.OnCardClicked -= HandleOnCardClicked;
-        m_cardsInHand.Remove(card);
 
+        m_manaModel.CurrentMana -= card.Model.CurrentCost;
+
+        m_handModel.RemoveCard(card.Model);
         m_boardModel.Add(card.Model);
-
-        AnimateRelayout();
     }
 
     private void GetFanTarget(int index, int count, out Vector3 pos, out Quaternion rot)

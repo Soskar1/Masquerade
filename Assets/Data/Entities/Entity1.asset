@@ -19,5 +19,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7e23dc2df6232e14a92250f639f6826e, type: 2}
   - {fileID: 11400000, guid: 9926624419d1e4d4fb657bdfe6e9a445, type: 2}
   m_health: 50
-  m_mana: 5
+  m_maxMana: 10
   m_handSize: 5
