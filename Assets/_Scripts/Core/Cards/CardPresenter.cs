@@ -32,16 +32,18 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Coroutine m_moveRoutine;
 
     private CardModel m_model;
+    public CardModel Model => m_model;
 
     private bool m_reactToMouseInput;
+    private bool m_isHoverAnimationEnabled = true;
+
+    public bool IsHoverAnimationEnabled
+    {
+        get => m_isHoverAnimationEnabled;
+        set => m_isHoverAnimationEnabled = value;
+    }
 
     public event EventHandler<CardPresenter> OnCardClicked;
-
-    public bool ReactToMouseInput
-    {
-        get => m_reactToMouseInput;
-        set => m_reactToMouseInput = value;
-    }
 
     private void Awake()
     {
@@ -50,10 +52,11 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             m_backgroundSpritesDict.Add(bgSprite.Color, bgSprite);
     }
 
-    public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true)
+    public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
     {
         m_model = model;
         m_reactToMouseInput = reactToMouseInput;
+        m_isHoverAnimationEnabled = isHoverAnimationEnabled;
         
         m_maskImage.sprite = model.CardData.MaskSprite;
         m_borderImage.sprite = model.CardData.BorderSprite;
@@ -97,7 +100,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!m_reactToMouseInput)
+        if (!IsHoverAnimationEnabled)
             return;
 
         Vector3 targetScale = m_baseLocalScale * m_hoverScaleMultiplier;
@@ -108,7 +111,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!m_reactToMouseInput)
+        if (!IsHoverAnimationEnabled)
             return;
 
         StartHoverTween(m_baseLocalPosition, m_baseLocalScale);

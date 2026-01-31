@@ -9,8 +9,8 @@ public class EntityPresenter : MonoBehaviour
 
     public void Initialize(EntityModel entityModel)
     {
-        m_boardPresenter.Initialize(entityModel.Board);
-        m_handPresenter.Initialize(entityModel.Hand, entityModel.Board, !entityModel.IsPlayer, entityModel.IsPlayer);
+        m_boardPresenter.Initialize(entityModel.Board, entityModel.Hand);
+        m_handPresenter.Initialize(entityModel.Hand, entityModel.Board, !entityModel.IsPlayer, entityModel.IsPlayer, entityModel.IsPlayer);
         m_healthPresenter.Initialize(entityModel.Health);
         m_manaPresenter.Initialize(entityModel.Mana);
     }

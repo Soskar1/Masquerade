@@ -11,12 +11,13 @@ public class BoardPresenter : MonoBehaviour
     private Dictionary<CardPresenter, CardPresenter> m_cardToPlaceholder;
 
     private BoardModel m_model;
+    private HandModel m_hand;
 
-    public void Initialize(BoardModel model)
+    public void Initialize(BoardModel model, HandModel hand)
     {
         m_model = model;
+        m_hand = hand;
         model.OnCardAdded += HandleOnCardAdded;
-        model.OnCardRemoved += HandleOnCardRemoved;
 
         m_cardToPlaceholder = new Dictionary<CardPresenter, CardPresenter>();
     }
@@ -24,19 +25,41 @@ public class BoardPresenter : MonoBehaviour
     private void OnDisable()
     {
         m_model.OnCardAdded -= HandleOnCardAdded;
-        m_model.OnCardRemoved -= HandleOnCardRemoved;
     }
 
-    private void HandleOnCardAdded(object sender, CardPresenter card)
+    private void HandleOnCardAdded(object sender, CardModel card)
     {
-        card.ReactToMouseInput = false;
+        CardPresenterRegistry.TryGet(card, out CardPresenter presenter);
+
+        presenter.IsHoverAnimationEnabled = false;
 
         CardPresenter placeholderInstace = Instantiate(m_ghostCardPrefab, m_placeholderParent);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(m_placeholderParent);
 
-        m_cardToPlaceholder.Add(card, placeholderInstace);
-        card.transform.SetParent(transform, true);
-        card.transform.localScale = card.BaseLocalScale;
+        m_cardToPlaceholder.Add(presenter, placeholderInstace);
+        presenter.transform.SetParent(transform, true);
+        presenter.transform.localScale = presenter.BaseLocalScale;
+
+        RealignCards();
+
+        presenter.OnCardClicked += HandleOnCardClicked;
+    }
+
+    private void HandleOnCardClicked(object sender, CardPresenter presenter)
+    {
+        presenter.OnCardClicked -= HandleOnCardClicked;
+
+        CardPresenter placeholder = m_cardToPlaceholder[presenter];
+        m_cardToPlaceholder.Remove(presenter);
+        GameObject.Destroy(placeholder.gameObject);
+
+        RealignCards();
+
+        m_hand.Add(presenter.Model);
+    }
+
+    private void RealignCards()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(m_placeholderParent);
 
         foreach (var cardAndPlaceholder in m_cardToPlaceholder)
         {
@@ -45,10 +68,5 @@ public class BoardPresenter : MonoBehaviour
 
             actualCard.MoveCard(actualCard.transform.localPosition, actualCard.transform.rotation, placeholder.transform.localPosition, placeholder.transform.rotation, m_cardMovementDuration, 0);
         }
-    }
-
-    private void HandleOnCardRemoved(object sender, CardPresenter card)
-    {
-        // TODO
     }
 }

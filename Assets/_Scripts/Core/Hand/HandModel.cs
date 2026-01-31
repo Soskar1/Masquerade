@@ -7,7 +7,7 @@ public class HandModel
     private List<CardModel> m_cards;
     private readonly DeckModel m_deck;
 
-    public event EventHandler<List<CardModel>> OnHandChanged;
+    public event EventHandler<CardModel> OnCardAdded;
     public event EventHandler<CardModel> OnCardRemoved;
 
     public HandModel(DeckModel deck, int maxSize)
@@ -17,18 +17,19 @@ public class HandModel
         m_deck = deck;
     }
 
+    public void Add(CardModel card)
+    {
+        m_cards.Add(card);
+        OnCardAdded?.Invoke(this, card);
+    }
+
     public void DrawCards()
     {
-        List<CardModel> cards = new List<CardModel>();
-
         for (int i = 0; i < m_maxSize; ++i)
         {
             CardModel card = m_deck.DrawCard();
-            cards.Add(card);
+            Add(card);
         }
-
-        m_cards = cards;
-        OnHandChanged?.Invoke(this, m_cards);
     }
 
     public void RemoveCard(CardModel card)
