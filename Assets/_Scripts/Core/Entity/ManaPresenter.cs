@@ -14,12 +14,13 @@ public class ManaPresenter : MonoBehaviour
         m_manaModel = model;
         DisplayMana(m_manaModel.CurrentMana);
 
-        m_manaModel.OnManaChanged += HandleOnManaChanged;
+        // TODO
+        // m_manaModel.OnManaChanged += HandleOnManaChanged;
     }
 
     private void OnDisable()
     {
-        m_manaModel.OnManaChanged -= HandleOnManaChanged;
+        // m_manaModel.OnManaChanged -= HandleOnManaChanged;
     }
 
     private void HandleOnManaChanged(object sender, OnManaChangedEventArgs e)

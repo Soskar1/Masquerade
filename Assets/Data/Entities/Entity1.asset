@@ -15,6 +15,9 @@ MonoBehaviour:
   m_cardPool:
   - {fileID: 11400000, guid: aa65b8d478340e041b2fd64f8a240c40, type: 2}
   - {fileID: 11400000, guid: 0121bd3d477151f43b838e07676ce432, type: 2}
+  - {fileID: 11400000, guid: cef23dda01dd47a47832a86be5f61368, type: 2}
+  - {fileID: 11400000, guid: 7e23dc2df6232e14a92250f639f6826e, type: 2}
+  - {fileID: 11400000, guid: 9926624419d1e4d4fb657bdfe6e9a445, type: 2}
   m_health: 50
   m_mana: 5
   m_handSize: 5
