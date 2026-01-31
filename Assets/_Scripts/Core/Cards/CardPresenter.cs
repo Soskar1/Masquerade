@@ -8,6 +8,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [SerializeField] private Image m_cardImage;
     [SerializeField] private TextMeshProUGUI m_scoreText;
+    [SerializeField] private TextMeshProUGUI m_costText;
     [SerializeField] private GameObject m_cardCover;
 
     [Header("Hover Settings")]
@@ -29,19 +30,25 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true)
     {
         m_model = model;
+        m_reactToMouseInput = reactToMouseInput;
+        
         m_cardImage.sprite = model.CardData.MaskSprite;
         m_scoreText.text = model.CurrentScore.ToString();
+        m_costText.text = model.CurrentCost.ToString();
+
         m_cardCover.SetActive(displayCardCover);
 
-        m_reactToMouseInput = reactToMouseInput;
-
         m_model.OnScoreChanged += HandleOnScoreChanged;
+        m_model.OnCostChanged += HandleOnCostChanged;
     }
 
     private void OnDisable()
     {
         if (m_model != null)
+        {
             m_model.OnScoreChanged -= HandleOnScoreChanged;
+            m_model.OnCostChanged -= HandleOnCostChanged;
+        }
 
         if (m_hoverRoutine != null)
             StopCoroutine(m_hoverRoutine);
@@ -54,9 +61,14 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    private void HandleOnScoreChanged(object sender, int e)
+    private void HandleOnScoreChanged(object sender, int score)
     {
-        m_scoreText.text = e.ToString();
+        m_scoreText.text = score.ToString();
+    }
+
+    private void HandleOnCostChanged(object sender, int cost)
+    {
+        m_costText.text = cost.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
