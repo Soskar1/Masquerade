@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class DeckModel
 {
-    private readonly List<CardModel> m_cards;
+    private readonly List<CardData> m_cards;
 
-    public DeckModel(List<CardData> cards)
+    public DeckModel(List<CardData> cards) => m_cards = cards;
+
+    public CardModel DrawCard()
     {
-        m_cards = new List<CardModel>();
-        foreach (CardData card in cards)
-            m_cards.Add(new CardModel(card));
-    }
+        CardData cardData = m_cards[Random.Range(0, m_cards.Count)];
 
-    public CardModel DrawCard() => m_cards[Random.Range(0, m_cards.Count)];
+        int value = Random.Range(0, System.Enum.GetValues(typeof(CardColor)).Length);
+        CardColor color = (CardColor)value;
+
+        return new CardModel(cardData, color);
+    }
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_maxFanAngle: 10
   m_curveHeight: 10
   m_cardSpacing: 110
-  m_offsetY: 100
+  m_offsetY: 120
   m_drawDuration: 0.3
   m_drawDelayBetweenCards: 0.05
 --- !u!1 &1815412186223775988
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_ChildAlignment: 6
   m_StartCorner: 2
   m_StartAxis: 0
-  m_CellSize: {x: 50, y: 50}
+  m_CellSize: {x: 35, y: 35}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d8c7f2582c3fc48a2a5810ba3223ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_manaPrefab: {fileID: 0}
+  m_manaPrefab: {fileID: 2050398520723329002, guid: fae306fa48df98b47b032b97ed384339, type: 3}
 --- !u!1 &7440329073369344998
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,16 +587,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8319316802146588313}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2608247, y: 1.8912369, z: 1.2608247}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5593531923090220604}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -137, y: 97}
+  m_AnchoredPosition: {x: -137, y: 138}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5464297794302399513

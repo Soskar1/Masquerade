@@ -107,18 +107,23 @@ public class HandPresenter : MonoBehaviour
 
             // Animate to target
             float delay = i * m_drawDelayBetweenCards;
-            StartCoroutine(AnimateCardToHand(tr, deckLocalPos, deckLocalRot, targetPos, targetRot, delay));
+            StartCoroutine(AnimateCardToHand(card, deckLocalPos, deckLocalRot, targetPos, targetRot, delay));
         }
     }
 
     private IEnumerator AnimateCardToHand(
-        Transform cardTransform,
+        CardPresenter card,
         Vector3 startPos,
         Quaternion startRot,
         Vector3 targetPos,
         Quaternion targetRot,
         float delay)
     {
+        if (m_reactToMouseInput)
+            card.ReactToMouseInput = false;
+
+        Transform cardTransform = card.transform;
+
         if (delay > 0f)
             yield return new WaitForSeconds(delay);
 
@@ -144,6 +149,9 @@ public class HandPresenter : MonoBehaviour
             cardTransform.localPosition = targetPos;
             cardTransform.localRotation = targetRot;
         }
+
+        if (m_reactToMouseInput)
+            card.ReactToMouseInput = true;
     }
 
     // Fallback / non-animated layout
