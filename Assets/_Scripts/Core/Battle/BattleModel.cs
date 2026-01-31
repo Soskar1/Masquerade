@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class BattleController
+public class BattleModel
 {
     private EntityModel m_player;
     private EntityModel m_enemy;
 
-    public BattleController(EntityModel player, EntityModel enemy)
+    public event EventHandler OnTurnStarted;
+
+    public BattleModel(EntityModel player, EntityModel enemy)
     {
         m_player = player;
         m_enemy = enemy;
@@ -22,6 +25,8 @@ public class BattleController
             m_enemy.Hand.RemoveCard(card);
             m_enemy.Board.Add(card);
         }
+
+        OnTurnStarted?.Invoke(this, EventArgs.Empty);
     }
 
     public List<CardModel> EnemyPickCards()
@@ -45,5 +50,10 @@ public class BattleController
         } while (found);
 
         return cards;
+    }
+
+    public void EndTurn()
+    {
+        
     }
 }
