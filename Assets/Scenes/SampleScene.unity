@@ -483,10 +483,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cardPresenterPrefab: {fileID: 83793265748994019, guid: 02d98e01a235cdc48a8a47a8b3ffaf59, type: 3}
+  m_deck: {fileID: 1743284208}
   m_maxFanAngle: 10
   m_curveHeight: 10
   m_cardSpacing: 110
   m_offsetY: 100
+  m_drawDuration: 0.3
+  m_drawDelayBetweenCards: 0.05
 --- !u!1 &729073400
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,13 +892,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743284207}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2608247, y: 1.8912369, z: 1.2608247}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2038723565}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 822, y: 36.00003}
@@ -988,10 +991,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cardPresenterPrefab: {fileID: 83793265748994019, guid: 02d98e01a235cdc48a8a47a8b3ffaf59, type: 3}
+  m_deck: {fileID: 1949890611}
   m_maxFanAngle: 10
   m_curveHeight: 10
   m_cardSpacing: 110
   m_offsetY: 100
+  m_drawDuration: 0.3
+  m_drawDelayBetweenCards: 0.05
 --- !u!1 &1873246408
 GameObject:
   m_ObjectHideFlags: 0
