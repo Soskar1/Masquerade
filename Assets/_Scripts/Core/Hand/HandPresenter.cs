@@ -16,11 +16,17 @@ public class HandPresenter : MonoBehaviour
     private List<CardPresenter> m_cardsInHand;
     private HandModel m_handModel;
 
-    public void Initialize(HandModel model)
+    private bool m_displayCardHover;
+    private bool m_reactToMouseInput;
+
+    public void Initialize(HandModel model, bool hideCards = false, bool reactToMouseInput = true)
     {
         m_handModel = model;
         m_handModel.OnHandChanged += HandleOnHandChanged;
         m_cardsInHand = new List<CardPresenter>();
+
+        m_displayCardHover = hideCards;
+        m_reactToMouseInput = reactToMouseInput;
     }
 
     private void HandleOnHandChanged(object sender, List<CardModel> e)
@@ -28,7 +34,7 @@ public class HandPresenter : MonoBehaviour
         foreach (CardModel model in e)
         {
             CardPresenter instance = Instantiate(m_cardPresenterPrefab, transform);
-            instance.Initialize(model);
+            instance.Initialize(model, m_displayCardHover, m_reactToMouseInput);
 
             m_cardsInHand.Add(instance);
         }

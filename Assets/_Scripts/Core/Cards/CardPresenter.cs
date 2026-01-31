@@ -8,12 +8,13 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [SerializeField] private Image m_cardImage;
     [SerializeField] private TextMeshProUGUI m_scoreText;
+    [SerializeField] private GameObject m_cardCover;
 
     [Header("Hover Settings")]
     [SerializeField] private float m_hoverScaleMultiplier = 1.2f;
-    [SerializeField] private float m_hoverOffset = 40f;        // how far to move along local "up"
-    [SerializeField] private float m_hoverDuration = 0.15f;    // seconds
-    [SerializeField] private float m_maxLocalY = 120f; // upper limit in parent local space
+    [SerializeField] private float m_hoverOffset = 40f;
+    [SerializeField] private float m_hoverDuration = 0.15f;
+    [SerializeField] private float m_maxLocalY = 120f;
 
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
@@ -23,11 +24,16 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private CardModel m_model;
 
-    public void Initialize(CardModel model)
+    private bool m_reactToMouseInput;
+
+    public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true)
     {
         m_model = model;
         m_cardImage.sprite = model.CardData.MaskSprite;
         m_scoreText.text = model.CurrentScore.ToString();
+        m_cardCover.SetActive(displayCardCover);
+
+        m_reactToMouseInput = reactToMouseInput;
 
         m_model.OnScoreChanged += HandleOnScoreChanged;
     }
@@ -55,6 +61,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!m_reactToMouseInput)
+            return;
+
         // Store the base transform on first hover
         if (!m_hasBaseTransform)
         {
@@ -71,6 +80,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!m_reactToMouseInput)
+            return;
+
         if (!m_hasBaseTransform)
             return;
 

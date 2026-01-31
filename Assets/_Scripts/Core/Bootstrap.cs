@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private HandPresenter m_handPresenter;
+    [SerializeField] private HandPresenter m_playerHand;
+    [SerializeField] private HandPresenter m_enemyHand;
+
     [SerializeField] private List<CardData> m_cardPool;
     [SerializeField] private DeckModel m_deckModel;
 
@@ -11,9 +13,13 @@ public class Bootstrap : MonoBehaviour
     {
         DeckModel deck = new DeckModel(m_cardPool);
 
-        HandModel handModel = new HandModel(deck, 5);
-        m_handPresenter.Initialize(handModel);
+        HandModel playerHandModel = new HandModel(deck, 5);
+        m_playerHand.Initialize(playerHandModel);
 
-        handModel.DrawCards();
+        HandModel enemyHandModel = new HandModel(deck, 5);
+        m_enemyHand.Initialize(enemyHandModel, hideCards: true, reactToMouseInput: false);
+
+        playerHandModel.DrawCards();
+        enemyHandModel.DrawCards();
     }
 }
