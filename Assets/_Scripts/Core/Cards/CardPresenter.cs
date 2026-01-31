@@ -30,6 +30,12 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private bool m_reactToMouseInput;
 
+    public bool ReactToMouseInput
+    {
+        get => m_reactToMouseInput;
+        set => m_reactToMouseInput = value;
+    }
+
     public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true)
     {
         m_model = model;
