@@ -32,11 +32,22 @@ public class HandPresenter : MonoBehaviour
         m_boardModel = boardModel;
         m_manaModel = manaModel;
         m_handModel.OnCardAdded += HandleOnCardAdded;
+        m_handModel.OnCardRemoved += HandleOnCardRemoved;
         m_cardsInHand = new List<CardPresenter>();
 
         m_displayCardHover = hideCards;
         m_reactToMouseInput = reactToMouseInput;
         m_isHoverAnimationEnabled = isHoverAnimationEnabled;
+    }
+
+    private void HandleOnCardRemoved(object sender, CardModel card)
+    {
+        m_handModel.OnCardAdded -= HandleOnCardRemoved;
+
+        CardPresenterRegistry.TryGet(card, out CardPresenter presenter);
+        m_cardsInHand.Remove(presenter);
+
+        AnimateRelayout();
     }
 
     private void OnDisable()
@@ -77,10 +88,8 @@ public class HandPresenter : MonoBehaviour
 
         m_manaModel.CurrentMana -= card.Model.CurrentCost;
 
-        m_cardsInHand.Remove(card);
+        m_handModel.RemoveCard(card.Model);
         m_boardModel.Add(card.Model);
-
-        AnimateRelayout();
     }
 
     private void GetFanTarget(int index, int count, out Vector3 pos, out Quaternion rot)

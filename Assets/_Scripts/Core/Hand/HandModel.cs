@@ -10,6 +10,8 @@ public class HandModel
     public event EventHandler<CardModel> OnCardAdded;
     public event EventHandler<CardModel> OnCardRemoved;
 
+    public List<CardModel> Cards => m_cards;
+
     public HandModel(DeckModel deck, int maxSize)
     {
         m_maxSize = maxSize;

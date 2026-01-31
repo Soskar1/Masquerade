@@ -10,7 +10,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private EntityData m_enemyData;
     [SerializeField] private EntityPresenter m_enemyPresenter;
 
-    public void Awake()
+    public async void Awake()
     {
         EntityModel player = new EntityModel(m_playerData, true);
         EntityModel enemy = new EntityModel(m_enemyData, false);
@@ -20,5 +20,8 @@ public class Bootstrap : MonoBehaviour
 
         player.Hand.DrawCards();
         enemy.Hand.DrawCards();
+
+        BattleController battle = new BattleController(player, enemy);
+        await battle.StartTurn();
     }
 }
