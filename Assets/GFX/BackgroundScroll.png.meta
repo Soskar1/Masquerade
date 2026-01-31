@@ -1,0 +1,1495 @@
+fileFormatVersion: 2
+guid: a6b2c42ee5b5fca49a92a23f9e1e0368
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1720228181907633887
+    second: BackgroundScroll_0
+  - first:
+      213: -5284141450883761182
+    second: BackgroundScroll_1
+  - first:
+      213: -5736585759445590687
+    second: BackgroundScroll_2
+  - first:
+      213: -5803732831528469570
+    second: BackgroundScroll_3
+  - first:
+      213: 4173397077338259055
+    second: BackgroundScroll_4
+  - first:
+      213: 7320637023086054114
+    second: BackgroundScroll_5
+  - first:
+      213: 8512806084321585745
+    second: BackgroundScroll_6
+  - first:
+      213: -5109501796691297258
+    second: BackgroundScroll_7
+  - first:
+      213: -6024789505443468840
+    second: BackgroundScroll_8
+  - first:
+      213: 9082106315712219247
+    second: BackgroundScroll_9
+  - first:
+      213: -8917474691385719273
+    second: BackgroundScroll_10
+  - first:
+      213: -5549175146206092920
+    second: BackgroundScroll_11
+  - first:
+      213: -1236903778980297279
+    second: BackgroundScroll_12
+  - first:
+      213: -7590355713714489826
+    second: BackgroundScroll_13
+  - first:
+      213: -6527251612979331846
+    second: BackgroundScroll_14
+  - first:
+      213: 878848477588263895
+    second: BackgroundScroll_15
+  - first:
+      213: 380188891540812356
+    second: BackgroundScroll_16
+  - first:
+      213: -7999008096599670366
+    second: BackgroundScroll_17
+  - first:
+      213: 6626264060321153155
+    second: BackgroundScroll_18
+  - first:
+      213: 8400694825291297934
+    second: BackgroundScroll_19
+  - first:
+      213: -4506577420792790606
+    second: BackgroundScroll_20
+  - first:
+      213: 229009648804528741
+    second: BackgroundScroll_21
+  - first:
+      213: -2820129685393994519
+    second: BackgroundScroll_22
+  - first:
+      213: -5938889643574516754
+    second: BackgroundScroll_23
+  - first:
+      213: 5211998641106094643
+    second: BackgroundScroll_24
+  - first:
+      213: 960656736980789005
+    second: BackgroundScroll_25
+  - first:
+      213: 9152833566414848933
+    second: BackgroundScroll_26
+  - first:
+      213: -4533380457236544335
+    second: BackgroundScroll_27
+  - first:
+      213: 6858491459702827911
+    second: BackgroundScroll_28
+  - first:
+      213: -8698097019084365070
+    second: BackgroundScroll_29
+  - first:
+      213: 5889718469426562310
+    second: BackgroundScroll_30
+  - first:
+      213: 2580625969783117530
+    second: BackgroundScroll_31
+  - first:
+      213: -1187489962299636758
+    second: BackgroundScroll_32
+  - first:
+      213: 5439219442970808399
+    second: BackgroundScroll_33
+  - first:
+      213: 2938070643339177964
+    second: BackgroundScroll_34
+  - first:
+      213: -4745464499395912680
+    second: BackgroundScroll_35
+  - first:
+      213: 4203179277988658173
+    second: BackgroundScroll_36
+  - first:
+      213: 7827184759480262679
+    second: BackgroundScroll_37
+  - first:
+      213: -545201695730848979
+    second: BackgroundScroll_38
+  - first:
+      213: -7787782076676172070
+    second: BackgroundScroll_39
+  - first:
+      213: 3835093456727712179
+    second: BackgroundScroll_40
+  - first:
+      213: 7690851881355719083
+    second: BackgroundScroll_41
+  - first:
+      213: 5306723215537289955
+    second: BackgroundScroll_42
+  - first:
+      213: 7206483640249921629
+    second: BackgroundScroll_43
+  - first:
+      213: -5475000619120935238
+    second: BackgroundScroll_44
+  - first:
+      213: -4724427339542064815
+    second: BackgroundScroll_45
+  - first:
+      213: -5090006757721069461
+    second: BackgroundScroll_46
+  - first:
+      213: 2562827562271285323
+    second: BackgroundScroll_47
+  - first:
+      213: 427589073004867615
+    second: BackgroundScroll_48
+  - first:
+      213: 2633754754970327831
+    second: BackgroundScroll_49
+  - first:
+      213: 2124723240543890358
+    second: BackgroundScroll_50
+  - first:
+      213: -4323886300926969489
+    second: BackgroundScroll_51
+  - first:
+      213: 5447371879421098173
+    second: BackgroundScroll_52
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 512
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BackgroundScroll_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 332
+        width: 20
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd67833da6a7fd710800000000000000
+      internalID: 1720228181907633887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_1
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 332
+        width: 39
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ebf725d855faa6b0800000000000000
+      internalID: -5284141450883761182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_2
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 332
+        width: 39
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16d5ea045ad8360b0800000000000000
+      internalID: -5736585759445590687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_3
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 332
+        width: 39
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebb397d3dbff47fa0800000000000000
+      internalID: -5803732831528469570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_4
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 332
+        width: 39
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6e766db782eae930800000000000000
+      internalID: 4173397077338259055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_5
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 332
+        width: 39
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea0e9a0690289560800000000000000
+      internalID: 7320637023086054114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_6
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 332
+        width: 39
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15aa5c9e700932670800000000000000
+      internalID: 8512806084321585745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_7
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 332
+        width: 19
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61cbefcef276719b0800000000000000
+      internalID: -5109501796691297258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_8
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 270
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d96a819dd5a36ca0800000000000000
+      internalID: -6024789505443468840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_9
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 270
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f68cb58339f1a0e70800000000000000
+      internalID: 9082106315712219247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_10
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 270
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7160b66d304ce3480800000000000000
+      internalID: -8917474691385719273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_11
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 270
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 881a5f5fa9e5df2b0800000000000000
+      internalID: -5549175146206092920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_12
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 270
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c58a800192a5dee0800000000000000
+      internalID: -1236903778980297279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_13
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 270
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e16f03d91b3a9a690800000000000000
+      internalID: -7590355713714489826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_14
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 270
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afc75c8ad3b8a65a0800000000000000
+      internalID: -6527251612979331846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 218
+        width: 20
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d39a06b80c423c00800000000000000
+      internalID: 878848477588263895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_16
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 218
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 442f6d358c3b64500800000000000000
+      internalID: 380188891540812356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_17
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 218
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a104b64480ddf090800000000000000
+      internalID: -7999008096599670366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_18
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 218
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 380416f2e0835fb50800000000000000
+      internalID: 6626264060321153155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_19
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 218
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8433ff4f63459470800000000000000
+      internalID: 8400694825291297934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_20
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 218
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b189d076bb6571c0800000000000000
+      internalID: -4506577420792790606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_21
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 218
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 562812fef0b9d2300800000000000000
+      internalID: 229009648804528741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_22
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 218
+        width: 19
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ec8e892ef2ecd8d0800000000000000
+      internalID: -2820129685393994519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_23
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 156
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee3ae72b553d49da0800000000000000
+      internalID: -5938889643574516754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_24
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 156
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33a82f4562db45840800000000000000
+      internalID: 5211998641106094643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_25
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 156
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0763d66630f45d00800000000000000
+      internalID: 960656736980789005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_26
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 156
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a3cd6682a5650f70800000000000000
+      internalID: 9152833566414848933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_27
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 156
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b4c7b63e723611c0800000000000000
+      internalID: -4533380457236544335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_28
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 156
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78b23ae05a14e2f50800000000000000
+      internalID: 6858491459702827911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_29
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 156
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f2a79b78d62a4780800000000000000
+      internalID: -8698097019084365070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 104
+        width: 20
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6054a3d2ebb7cb150800000000000000
+      internalID: 5889718469426562310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_31
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 104
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad6121395a930d320800000000000000
+      internalID: 2580625969783117530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_32
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 104
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae3c9cebb20358fe0800000000000000
+      internalID: -1187489962299636758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_33
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 104
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f405ca1e34dfb7b40800000000000000
+      internalID: 5439219442970808399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_34
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 104
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cef2c3dfeaf16c820800000000000000
+      internalID: 2938070643339177964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_35
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 104
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81c974b2e29b42eb0800000000000000
+      internalID: -4745464499395912680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_36
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 104
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfbfbcfa841b45a30800000000000000
+      internalID: 4203179277988658173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_37
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 104
+        width: 19
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7102c2c811fbf9c60800000000000000
+      internalID: 7827184759480262679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_38
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 42
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2ba50342fd0f68f0800000000000000
+      internalID: -545201695730848979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_39
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 42
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad61093767d3ce390800000000000000
+      internalID: -7787782076676172070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_40
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 42
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b12ea00e2df83530800000000000000
+      internalID: 3835093456727712179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_41
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 42
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba13a58c9056bba60800000000000000
+      internalID: 7690851881355719083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_42
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 42
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ea3b67f5a445a940800000000000000
+      internalID: 5306723215537289955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_43
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 42
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d50b2c070b2920460800000000000000
+      internalID: 7206483640249921629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_44
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 42
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abeb048d1f3e404b0800000000000000
+      internalID: -5475000619120935238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1519373ad567f6eb0800000000000000
+      internalID: -4724427339542064815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_46
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 0
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b68a2b562d9ac59b0800000000000000
+      internalID: -5090006757721069461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_47
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 0
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b40a2c5e61ef09320800000000000000
+      internalID: 2562827562271285323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_48
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 0
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f103b461ff91fe500800000000000000
+      internalID: 427589073004867615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_49
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 0
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71b9083def9fc8420800000000000000
+      internalID: 2633754754970327831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_50
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 0
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bba2aea7888c7d10800000000000000
+      internalID: 2124723240543890358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_51
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 0
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f69f11871587ef3c0800000000000000
+      internalID: -4323886300926969489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundScroll_52
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 0
+        width: 19
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db8b858ecd3f89b40800000000000000
+      internalID: 5447371879421098173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BackgroundScroll_0: 1720228181907633887
+      BackgroundScroll_1: -5284141450883761182
+      BackgroundScroll_10: -8917474691385719273
+      BackgroundScroll_11: -5549175146206092920
+      BackgroundScroll_12: -1236903778980297279
+      BackgroundScroll_13: -7590355713714489826
+      BackgroundScroll_14: -6527251612979331846
+      BackgroundScroll_15: 878848477588263895
+      BackgroundScroll_16: 380188891540812356
+      BackgroundScroll_17: -7999008096599670366
+      BackgroundScroll_18: 6626264060321153155
+      BackgroundScroll_19: 8400694825291297934
+      BackgroundScroll_2: -5736585759445590687
+      BackgroundScroll_20: -4506577420792790606
+      BackgroundScroll_21: 229009648804528741
+      BackgroundScroll_22: -2820129685393994519
+      BackgroundScroll_23: -5938889643574516754
+      BackgroundScroll_24: 5211998641106094643
+      BackgroundScroll_25: 960656736980789005
+      BackgroundScroll_26: 9152833566414848933
+      BackgroundScroll_27: -4533380457236544335
+      BackgroundScroll_28: 6858491459702827911
+      BackgroundScroll_29: -8698097019084365070
+      BackgroundScroll_3: -5803732831528469570
+      BackgroundScroll_30: 5889718469426562310
+      BackgroundScroll_31: 2580625969783117530
+      BackgroundScroll_32: -1187489962299636758
+      BackgroundScroll_33: 5439219442970808399
+      BackgroundScroll_34: 2938070643339177964
+      BackgroundScroll_35: -4745464499395912680
+      BackgroundScroll_36: 4203179277988658173
+      BackgroundScroll_37: 7827184759480262679
+      BackgroundScroll_38: -545201695730848979
+      BackgroundScroll_39: -7787782076676172070
+      BackgroundScroll_4: 4173397077338259055
+      BackgroundScroll_40: 3835093456727712179
+      BackgroundScroll_41: 7690851881355719083
+      BackgroundScroll_42: 5306723215537289955
+      BackgroundScroll_43: 7206483640249921629
+      BackgroundScroll_44: -5475000619120935238
+      BackgroundScroll_45: -4724427339542064815
+      BackgroundScroll_46: -5090006757721069461
+      BackgroundScroll_47: 2562827562271285323
+      BackgroundScroll_48: 427589073004867615
+      BackgroundScroll_49: 2633754754970327831
+      BackgroundScroll_5: 7320637023086054114
+      BackgroundScroll_50: 2124723240543890358
+      BackgroundScroll_51: -4323886300926969489
+      BackgroundScroll_52: 5447371879421098173
+      BackgroundScroll_6: 8512806084321585745
+      BackgroundScroll_7: -5109501796691297258
+      BackgroundScroll_8: -6024789505443468840
+      BackgroundScroll_9: 9082106315712219247
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
