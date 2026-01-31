@@ -12,11 +12,13 @@ public class BoardPresenter : MonoBehaviour
 
     private BoardModel m_model;
     private HandModel m_hand;
+    private ManaModel m_mana;
 
-    public void Initialize(BoardModel model, HandModel hand)
+    public void Initialize(BoardModel model, HandModel hand, ManaModel mana)
     {
         m_model = model;
         m_hand = hand;
+        m_mana = mana;
         model.OnCardAdded += HandleOnCardAdded;
 
         m_cardToPlaceholder = new Dictionary<CardPresenter, CardPresenter>();
@@ -47,6 +49,8 @@ public class BoardPresenter : MonoBehaviour
     private void HandleOnCardClicked(object sender, CardPresenter presenter)
     {
         presenter.OnCardClicked -= HandleOnCardClicked;
+
+        m_mana.CurrentMana += presenter.Model.CurrentCost;
 
         CardPresenter placeholder = m_cardToPlaceholder[presenter];
         m_cardToPlaceholder.Remove(presenter);

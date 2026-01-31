@@ -11,6 +11,7 @@ public class ManaModel
         set
         {
             if (value < 0) value = 0;
+            if (value > m_maxMana) value = m_maxMana;
 
             m_currentMana = value;
             

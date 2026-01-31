@@ -20,15 +20,17 @@ public class HandPresenter : MonoBehaviour
     private List<CardPresenter> m_cardsInHand;
     private HandModel m_handModel;
     private BoardModel m_boardModel;
+    private ManaModel m_manaModel;
 
     private bool m_displayCardHover;
     private bool m_reactToMouseInput;
     private bool m_isHoverAnimationEnabled;
 
-    public void Initialize(HandModel model, BoardModel boardModel, bool hideCards = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
+    public void Initialize(HandModel model, BoardModel boardModel, ManaModel manaModel, bool hideCards = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
     {
         m_handModel = model;
         m_boardModel = boardModel;
+        m_manaModel = manaModel;
         m_handModel.OnCardAdded += HandleOnCardAdded;
         m_cardsInHand = new List<CardPresenter>();
 
@@ -68,9 +70,14 @@ public class HandPresenter : MonoBehaviour
 
     private void HandleOnCardClicked(object sender, CardPresenter card)
     {
-        card.OnCardClicked -= HandleOnCardClicked;
-        m_cardsInHand.Remove(card);
+        if (m_manaModel.CurrentMana < card.Model.CurrentCost)
+            return;
 
+        card.OnCardClicked -= HandleOnCardClicked;
+
+        m_manaModel.CurrentMana -= card.Model.CurrentCost;
+
+        m_cardsInHand.Remove(card);
         m_boardModel.Add(card.Model);
 
         AnimateRelayout();

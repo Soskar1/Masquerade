@@ -12,7 +12,7 @@ public class EntityModel
         Health = new HealthModel(data.Health);
         Deck = new DeckModel(data.CardPool);
         Hand = new HandModel(Deck, data.HandSize);
-        Mana = new ManaModel(data.Mana);
+        Mana = new ManaModel(data.MaxMana);
         Board = new BoardModel();
         IsPlayer = isPlayer;
     }
