@@ -57,8 +57,10 @@ public class BattlePresenter : MonoBehaviour
 
         m_playerBoardPresenter.BoardModel.Clear();
         m_enemyBoardPresenter.BoardModel.Clear();
-        await Task.Delay(2000);
         await Task.WhenAll(textMovementTasks);
-        
+        await Task.Delay(2000);
+
+        m_playerScore.Clear();
+        m_enemyScore.Clear();
     }
 }
