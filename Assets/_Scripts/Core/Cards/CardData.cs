@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CardData", menuName = "Cards/Card Data")]
+[CreateAssetMenu(fileName = "CardData", menuName = "Card Data")]
 public class CardData : ScriptableObject
 {
     [SerializeField] private Sprite m_maskSprite;

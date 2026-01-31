@@ -31,9 +31,9 @@ public class HealthModel
 
     public event EventHandler<OnHealthChangedEventArgs> OnHealthChanged;
 
-    public HealthModel(int currentHealth, int maxHealth)
+    public HealthModel(int maxHealth)
     {
-        m_currentHealth = currentHealth;
+        m_currentHealth = maxHealth;
         m_maxHealth = maxHealth;
     }
 }

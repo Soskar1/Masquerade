@@ -1,25 +1,24 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private HandPresenter m_playerHand;
-    [SerializeField] private HandPresenter m_enemyHand;
+    [Header("Player")]
+    [SerializeField] private EntityData m_playerData;
+    [SerializeField] private EntityPresenter m_playerPresenter;
 
-    [SerializeField] private List<CardData> m_cardPool;
-    [SerializeField] private DeckModel m_deckModel;
+    [Header("Enemy")]
+    [SerializeField] private EntityData m_enemyData;
+    [SerializeField] private EntityPresenter m_enemyPresenter;
 
     public void Awake()
     {
-        DeckModel deck = new DeckModel(m_cardPool);
+        EntityModel player = new EntityModel(m_playerData, true);
+        EntityModel enemy = new EntityModel(m_enemyData, false);
 
-        HandModel playerHandModel = new HandModel(deck, 5);
-        m_playerHand.Initialize(playerHandModel);
+        m_playerPresenter.Initialize(player);
+        m_enemyPresenter.Initialize(enemy);
 
-        HandModel enemyHandModel = new HandModel(deck, 5);
-        m_enemyHand.Initialize(enemyHandModel, hideCards: true, reactToMouseInput: false);
-
-        playerHandModel.DrawCards();
-        enemyHandModel.DrawCards();
+        player.Hand.DrawCards();
+        enemy.Hand.DrawCards();
     }
 }
