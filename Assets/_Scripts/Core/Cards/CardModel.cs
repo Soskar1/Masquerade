@@ -17,11 +17,26 @@ public class CardModel
         }
     }
 
+    private int m_currentCost;
+    public int CurrentCost
+    {
+        get => m_currentCost;
+        set
+        {
+            if (value < 0) value = 0;
+
+            m_currentCost = value;
+            OnCostChanged?.Invoke(this, m_currentCost);
+        }
+    }
+
     public event EventHandler<int> OnScoreChanged;
+    public event EventHandler<int> OnCostChanged;
 
     public CardModel(CardData data)
     {
         CardData = data;
         CurrentScore = data.Score;
+        CurrentCost = data.Cost;
     }
 }

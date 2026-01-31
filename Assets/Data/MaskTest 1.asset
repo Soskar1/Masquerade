@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07e0599c948ccaa43980b63ba6f0b10b, type: 3}
-  m_Name: MaskTest
+  m_Name: MaskTest 1
   m_EditorClassIdentifier: 
   m_maskSprite: {fileID: -2413806693520163455, guid: 4cd3a831fd2b2ac46874a178424769f2, type: 3}
-  m_score: 1
-  m_cost: 1
+  m_score: 5
+  m_cost: 3
