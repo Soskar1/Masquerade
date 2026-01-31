@@ -20,9 +20,6 @@ public class Bootstrap : MonoBehaviour
         m_playerPresenter.Initialize(player);
         m_enemyPresenter.Initialize(enemy);
 
-        player.Hand.DrawCards();
-        enemy.Hand.DrawCards();
-
         BattleModel battle = new BattleModel(player, enemy);
         m_battlePresenter.Initialize(battle);
         await battle.StartTurn();

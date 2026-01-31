@@ -17,6 +17,9 @@ public class BattleModel
 
     public async Task StartTurn()
     {
+        m_player.Hand.DrawCards();
+        m_enemy.Hand.DrawCards();
+
         List<CardModel> enemyCards = EnemyPickCards();
 
         foreach (CardModel card in enemyCards)
