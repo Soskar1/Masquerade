@@ -1,8 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoardPresenter : MonoBehaviour
 {
-    [SerializeField] private Transform m_parent;
+    [SerializeField] private RectTransform m_placeholderParent;
+    [SerializeField] private CardPresenter m_ghostCardPrefab;
+    [SerializeField] private float m_cardMovementDuration;
+
+    private Dictionary<CardPresenter, CardPresenter> m_cardToPlaceholder;
 
     private BoardModel m_model;
 
@@ -11,6 +17,8 @@ public class BoardPresenter : MonoBehaviour
         m_model = model;
         model.OnCardAdded += HandleOnCardAdded;
         model.OnCardRemoved += HandleOnCardRemoved;
+
+        m_cardToPlaceholder = new Dictionary<CardPresenter, CardPresenter>();
     }
 
     private void OnDisable()
@@ -21,11 +29,22 @@ public class BoardPresenter : MonoBehaviour
 
     private void HandleOnCardAdded(object sender, CardPresenter card)
     {
-        card.transform.SetParent(m_parent, false);
-        card.transform.localPosition = Vector3.zero;
-        card.transform.localRotation = Quaternion.identity;
-        card.transform.localScale = card.BaseLocalScale;
         card.ReactToMouseInput = false;
+
+        CardPresenter placeholderInstace = Instantiate(m_ghostCardPrefab, m_placeholderParent);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(m_placeholderParent);
+
+        m_cardToPlaceholder.Add(card, placeholderInstace);
+        card.transform.SetParent(transform, true);
+        card.transform.localScale = card.BaseLocalScale;
+
+        foreach (var cardAndPlaceholder in m_cardToPlaceholder)
+        {
+            CardPresenter actualCard = cardAndPlaceholder.Key;
+            CardPresenter placeholder = cardAndPlaceholder.Value;
+
+            actualCard.MoveCard(actualCard.transform.localPosition, actualCard.transform.rotation, placeholder.transform.localPosition, placeholder.transform.rotation, m_cardMovementDuration, 0);
+        }
     }
 
     private void HandleOnCardRemoved(object sender, CardPresenter card)
