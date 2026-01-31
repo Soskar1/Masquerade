@@ -39,7 +39,6 @@ public class BattlePresenter : MonoBehaviour
 
     private async Task AnimateScoreCalcualtionAsync()
     {
-        List<ScoreMessage> playerScore = new List<ScoreMessage>();
 
         List<Task> textMovementTasks = new List<Task>();
         foreach (CardPresenter presenter in m_playerBoardPresenter.Cards)
@@ -47,10 +46,17 @@ public class BattlePresenter : MonoBehaviour
             ScoreMessage scoreMessage = presenter.SpawnScoreText();
             textMovementTasks.Add(scoreMessage.GetTask());
             scoreMessage.Target = m_playerScore;
-            playerScore.Add(scoreMessage);
+        }
+
+        foreach (CardPresenter presenter in m_enemyBoardPresenter.Cards)
+        {
+            ScoreMessage scoreMessage = presenter.SpawnScoreText();
+            textMovementTasks.Add(scoreMessage.GetTask());
+            scoreMessage.Target = m_enemyScore;
         }
 
         m_playerBoardPresenter.BoardModel.Clear();
+        m_enemyBoardPresenter.BoardModel.Clear();
         await Task.Delay(2000);
         await Task.WhenAll(textMovementTasks);
         
