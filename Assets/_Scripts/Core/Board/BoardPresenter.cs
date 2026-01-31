@@ -13,22 +13,40 @@ public class BoardPresenter : MonoBehaviour
     private BoardModel m_model;
     private HandModel m_hand;
     private ManaModel m_mana;
+    private BattleModel m_battle;
 
-    public void Initialize(BoardModel model, HandModel hand, ManaModel mana)
+    private bool m_canInteractWithCards = false;
+
+    public void Initialize(BoardModel model, HandModel hand, ManaModel mana, BattleModel battle)
     {
         m_model = model;
         m_hand = hand;
         m_mana = mana;
+        m_battle = battle;
         model.OnCardAdded += HandleOnCardAdded;
         model.OnCardRemoved += HandleOnCardRemoved;
+        m_battle.OnTurnStarted += HandleOnTurnStarted;
+        m_battle.OnTurnEnded += HandleOnTurnEnded;
 
         m_cardToPlaceholder = new Dictionary<CardPresenter, CardPresenter>();
+    }
+
+    private void HandleOnTurnStarted(object sender, System.EventArgs e)
+    {
+        m_canInteractWithCards = true;
+    }
+
+    private void HandleOnTurnEnded(object sender, System.EventArgs e)
+    {
+        m_canInteractWithCards = false;
     }
 
     private void OnDisable()
     {
         m_model.OnCardAdded -= HandleOnCardAdded;
         m_model.OnCardRemoved -= HandleOnCardRemoved;
+        m_battle.OnTurnStarted -= HandleOnTurnStarted;
+        m_battle.OnTurnEnded -= HandleOnTurnEnded;
     }
 
     private void HandleOnCardAdded(object sender, CardModel card)
@@ -61,6 +79,9 @@ public class BoardPresenter : MonoBehaviour
 
     private void HandleOnCardClicked(object sender, CardPresenter presenter)
     {
+        if (!m_canInteractWithCards)
+            return;
+
         presenter.OnCardClicked -= HandleOnCardClicked;
 
         m_mana.CurrentMana += presenter.Model.CurrentCost;

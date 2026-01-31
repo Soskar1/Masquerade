@@ -8,6 +8,7 @@ public class BattleModel
     private EntityModel m_enemy;
 
     public event EventHandler OnTurnStarted;
+    public event EventHandler OnTurnEnded;
 
     public BattleModel(EntityModel player, EntityModel enemy)
     {
@@ -57,6 +58,6 @@ public class BattleModel
 
     public void EndTurn()
     {
-        
+        OnTurnEnded?.Invoke(this, EventArgs.Empty);
     }
 }

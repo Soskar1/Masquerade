@@ -16,11 +16,11 @@ public class Bootstrap : MonoBehaviour
     {
         EntityModel player = new EntityModel(m_playerData, true);
         EntityModel enemy = new EntityModel(m_enemyData, false);
-
-        m_playerPresenter.Initialize(player);
-        m_enemyPresenter.Initialize(enemy);
-
         BattleModel battle = new BattleModel(player, enemy);
+
+        m_playerPresenter.Initialize(player, battle);
+        m_enemyPresenter.Initialize(enemy, battle);
+
         m_battlePresenter.Initialize(battle);
         await battle.StartTurn();
     }
