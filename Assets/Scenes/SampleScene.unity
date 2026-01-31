@@ -699,11 +699,11 @@ RectTransform:
   - {fileID: 569931799}
   m_Father: {fileID: 325318485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -410}
-  m_SizeDelta: {x: 267.282, y: 262}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_SizeDelta: {x: 267.28198, y: 262}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &729073400
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,11 +736,11 @@ RectTransform:
   - {fileID: 909912941}
   m_Father: {fileID: 325318485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 415}
-  m_SizeDelta: {x: 267.282, y: 262}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_SizeDelta: {x: 267.28198, y: 262}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &909912940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1189,7 @@ MonoBehaviour:
   m_handPresenter: {fileID: 1865957143}
   m_cardPool:
   - {fileID: 11400000, guid: aa65b8d478340e041b2fd64f8a240c40, type: 2}
+  - {fileID: 11400000, guid: 0121bd3d477151f43b838e07676ce432, type: 2}
 --- !u!4 &1331707530
 Transform:
   m_ObjectHideFlags: 0
@@ -1359,7 +1360,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1865957141}
-  - component: {fileID: 1865957142}
   - component: {fileID: 1865957143}
   m_Layer: 5
   m_Name: PlayerHand
@@ -1384,35 +1384,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 305}
-  m_SizeDelta: {x: -335.495, y: 189.115}
+  m_AnchoredPosition: {x: 0, y: -1}
+  m_SizeDelta: {x: -539.357, y: 189.115}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1865957142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865957140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 32
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &1865957143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1426,7 +1400,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cardPresenterPrefab: {fileID: 83793265748994019, guid: 02d98e01a235cdc48a8a47a8b3ffaf59, type: 3}
-  m_handParent: {fileID: 1865957141}
+  m_maxFanAngle: 10
+  m_curveHeight: 10
+  m_cardSpacing: 110
 --- !u!1 &1873246408
 GameObject:
   m_ObjectHideFlags: 0
