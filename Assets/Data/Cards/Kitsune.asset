@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07e0599c948ccaa43980b63ba6f0b10b, type: 3}
-  m_Name: SmileGreen
+  m_Name: Kitsune
   m_EditorClassIdentifier: 
   m_maskSprite: {fileID: 21300000, guid: 3a569b00c6ddef64eb20b7d5d7ec572e, type: 3}
-  m_borderSprite: {fileID: 21300000, guid: 56c30246ae4785f46a20e052b56b92f2, type: 3}
-  m_score: 5
+  m_borderSprite: {fileID: 21300000, guid: d8e03d7391b313c45ae1f2725c573086, type: 3}
+  m_score: 15
   m_cost: 1
