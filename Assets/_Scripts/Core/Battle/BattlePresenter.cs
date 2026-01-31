@@ -17,6 +17,9 @@ public class BattlePresenter : MonoBehaviour
     [SerializeField] private RectTransform m_playerOutOfBounds;
     [SerializeField] private RectTransform m_enemyOutOfBounds;
 
+    [SerializeField] private HealthPresenter m_playerHealthPresenter;
+    [SerializeField] private HealthPresenter m_enemyHealthPresenter;
+
     private BattleModel m_battleModel;
 
     public void Initialize(BattleModel model)
@@ -107,5 +110,9 @@ public class BattlePresenter : MonoBehaviour
         smaller.Speed = 1000;
         smaller.rotate = true;
         await smaller.GetTask();
+
+        bigger.Target = player > enemy ? m_enemyHealthPresenter.transform.position : m_playerHealthPresenter.transform.position;
+        bigger.Speed = 1000;
+        await bigger.GetTask();
     }
 }

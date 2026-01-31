@@ -3,29 +3,20 @@ using UnityEngine;
 
 public class ManaPresenter : MonoBehaviour
 {
-    [SerializeField] private GameObject m_manaPrefab;
-    private List<GameObject> m_currentMana;
+    [SerializeField] private List<GameObject> m_currentMana;
 
     private ManaModel m_manaModel;
 
     public void Initialize(ManaModel model)
     {
-        m_currentMana = new List<GameObject>();
         m_manaModel = model;
 
-        for (int i = 0; i < m_manaModel.MaxMana; ++i)
-        {
-            GameObject instance = Instantiate(m_manaPrefab, transform);
-            m_currentMana.Add(instance);
-        }
-
-        // TODO
-        // m_manaModel.OnManaChanged += HandleOnManaChanged;
+        m_manaModel.OnManaChanged += HandleOnManaChanged;
     }
 
     private void OnDisable()
     {
-        // m_manaModel.OnManaChanged -= HandleOnManaChanged;
+        m_manaModel.OnManaChanged -= HandleOnManaChanged;
     }
 
     private void HandleOnManaChanged(object sender, OnManaChangedEventArgs e)
