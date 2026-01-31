@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -11,9 +12,10 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Image m_maskImage;
     [SerializeField] private Image m_borderImage;
     [SerializeField] private Image m_backgroundImage;
-    [SerializeField] private TextMeshProUGUI m_scoreText;
-    [SerializeField] private TextMeshProUGUI m_costText;
     [SerializeField] private GameObject m_cardCover;
+
+    [SerializeField] private Image m_scoreImage;
+    [SerializeField] private Image m_costImage;
 
     [Header("Hover Settings")]
     [SerializeField] private float m_hoverScaleMultiplier = 1.2f;
@@ -23,6 +25,12 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
+
+    [SerializeField] private List<CardScoreSprite> m_scoreSprites;
+    private Dictionary<CardScore, CardScoreSprite> m_scoreSpritesDict;
+
+    [SerializeField] private List<CardCostSprite> m_costSprites;
+    private Dictionary<CardCost, CardCostSprite> m_costSpritesDict;
 
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
@@ -48,8 +56,19 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void Awake()
     {
         m_backgroundSpritesDict = new Dictionary<CardColor, CardColorBackgroundSprite>();
+
         foreach (CardColorBackgroundSprite bgSprite in m_backgroundSprites)
             m_backgroundSpritesDict.Add(bgSprite.Color, bgSprite);
+
+        m_scoreSpritesDict = new Dictionary<CardScore, CardScoreSprite>();
+
+        foreach (CardScoreSprite bgSprite in m_scoreSprites)
+            m_scoreSpritesDict.Add(bgSprite.Score, bgSprite);
+
+        m_costSpritesDict = new Dictionary<CardCost, CardCostSprite>();
+
+        foreach (CardCostSprite bgSprite in m_costSprites)
+            m_costSpritesDict.Add(bgSprite.Cost, bgSprite);
     }
 
     public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
@@ -61,11 +80,14 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_maskImage.sprite = model.CardData.MaskSprite;
         m_borderImage.sprite = model.CardData.BorderSprite;
         m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
-
-        m_scoreText.text = model.CurrentScore.ToString();
-        m_costText.text = model.CurrentCost.ToString();
+        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore)model.CurrentScore].Sprite;
+        m_costImage.sprite = m_costSpritesDict[(CardCost)model.CurrentCost].Sprite;
 
         m_cardCover.SetActive(displayCardCover);
+        m_maskImage.enabled = !displayCardCover;
+        m_backgroundImage.enabled = !displayCardCover;
+        m_scoreImage.enabled = !displayCardCover;
+        m_costImage.enabled = !displayCardCover;
 
         m_baseLocalScale = transform.localScale;
 
@@ -90,12 +112,12 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void HandleOnScoreChanged(object sender, int score)
     {
-        m_scoreText.text = score.ToString();
+        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore)score].Sprite;
     }
 
     private void HandleOnCostChanged(object sender, int cost)
     {
-        m_costText.text = cost.ToString();
+        m_costImage.sprite = m_costSpritesDict[(CardCost)cost].Sprite;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

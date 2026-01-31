@@ -373,6 +373,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325318485}
     m_Modifications:
+    - target: {fileID: 1110868526761449503, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110868526761449503, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.6999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110868526761449503, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110868526761449503, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449687403701195610, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e73573913cdebe84d88e1b23c102bc6b, type: 3}
+    - target: {fileID: 5449687403701195610, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5593531923090220604, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -627,6 +651,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325318485}
     m_Modifications:
+    - target: {fileID: 1110868526761449503, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1.8000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110868526761449503, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110868526761449503, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: -1.8000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110868526761449503, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449687403701195610, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e73573913cdebe84d88e1b23c102bc6b, type: 3}
+    - target: {fileID: 5449687403701195610, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5593531923090220604, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 673476d4105af83438b692920f20f324
+guid: 71efc1a625da6fd4b83cedc501f49270
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 937825170309344167
-    second: MasqueradeCards_0001s_0000_Border1_0
+      213: 4911650058654475422
+    second: MasqueradeCards_0000s_0003_Price0_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MasqueradeCards_0001s_0000_Border1_0
+      name: MasqueradeCards_0000s_0003_Price0_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 16
-        width: 65
-        height: 97
+        x: 10
+        y: 96
+        width: 22
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7ab65b90603d30d00800000000000000
-      internalID: 937825170309344167
+      spriteID: e94602f84bfa92440800000000000000
+      internalID: 4911650058654475422
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MasqueradeCards_0001s_0000_Border1_0: 937825170309344167
+      MasqueradeCards_0000s_0003_Price0_0: 4911650058654475422
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
