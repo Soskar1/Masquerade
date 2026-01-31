@@ -19,6 +19,8 @@ public class ScoreMessage : MonoBehaviour
         }
     }
 
+    public TextMeshProUGUI ScoreText => m_scoreText;
+
     public int Score { get; private set; }
 
     private Vector3 m_directionToMove;

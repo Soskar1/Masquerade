@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -20,9 +21,54 @@ public class CurrentScore : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private float m_lerpSpeed = 10f;
 
+    [SerializeField] private float m_speed = 150;
+    [SerializeField] private float m_minDistance = 0.5f;
+
     private int m_currentScore;
     private Vector3 m_targetScale;
     private Color m_targetColor;
+
+    private Vector3 m_target;
+    public Vector3 Target
+    {
+        get => m_target;
+        set
+        {
+            m_target = value;
+            m_directionToMove = (m_target - transform.position).normalized;
+        }
+    }
+
+    public float Speed
+    {
+        get => m_speed;
+        set
+        {
+            m_speed = value;
+        }
+    }
+
+    public bool rotate;
+
+    public Task GetTask()
+    {
+        MovedToTarget = new TaskCompletionSource<bool>();
+
+        return MovedToTarget.Task;
+    }
+
+    private Vector3 m_directionToMove;
+    TaskCompletionSource<bool> MovedToTarget;
+
+    public int Value => m_currentScore;
+
+    public void SetValue(int value)
+    {
+        m_currentScore = value;
+        m_text.text = (m_currentScore == 0) ? "" : m_currentScore.ToString();
+
+        UpdateTargets();
+    }
 
     private void Awake()
     {
@@ -53,6 +99,22 @@ public class CurrentScore : MonoBehaviour
 
         m_text.color =
             Color.Lerp(m_text.color, m_targetColor, Time.deltaTime * m_lerpSpeed);
+
+        if (rotate)
+        {
+            transform.Rotate(0, 0, Time.deltaTime * m_speed);
+        }
+
+        if (MovedToTarget == null)
+            return;
+
+        transform.position += m_directionToMove * m_speed * Time.deltaTime;
+
+        if (Vector2.Distance(transform.position, Target) < m_minDistance)
+        {
+            MovedToTarget.SetResult(true);
+            MovedToTarget = null;
+        }
     }
 
     private void UpdateTargets()

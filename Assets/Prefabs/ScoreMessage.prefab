@@ -152,4 +152,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_scoreText: {fileID: 7868467784684019878}
   m_minDistance: 0.5
-  m_speed: 100
+  m_speed: 200
