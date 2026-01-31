@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private Image m_maskImage;
     [SerializeField] private Image m_borderImage;
@@ -25,13 +26,16 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
-    private bool m_hasBaseTransform = false;
+    public Vector3 BaseLocalScale => m_baseLocalScale;
 
     private Coroutine m_hoverRoutine;
+    private Coroutine m_moveRoutine;
 
     private CardModel m_model;
 
     private bool m_reactToMouseInput;
+
+    public event EventHandler<CardPresenter> OnCardClicked;
 
     public bool ReactToMouseInput
     {
@@ -60,6 +64,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         m_cardCover.SetActive(displayCardCover);
 
+        m_baseLocalScale = transform.localScale;
+
         m_model.OnScoreChanged += HandleOnScoreChanged;
         m_model.OnCostChanged += HandleOnCostChanged;
     }
@@ -75,12 +81,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (m_hoverRoutine != null)
             StopCoroutine(m_hoverRoutine);
 
-        // Optional: reset transform when disabled
-        if (m_hasBaseTransform)
-        {
-            transform.localPosition = m_baseLocalPosition;
-            transform.localScale = m_baseLocalScale;
-        }
+        transform.localPosition = m_baseLocalPosition;
+        transform.localScale = m_baseLocalScale;
     }
 
     private void HandleOnScoreChanged(object sender, int score)
@@ -98,14 +100,6 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!m_reactToMouseInput)
             return;
 
-        // Store the base transform on first hover
-        if (!m_hasBaseTransform)
-        {
-            m_baseLocalPosition = transform.localPosition;
-            m_baseLocalScale = transform.localScale;
-            m_hasBaseTransform = true;
-        }
-
         Vector3 targetScale = m_baseLocalScale * m_hoverScaleMultiplier;
         Vector3 targetPos = CalculateHoverPosition(m_hoverOffset);
 
@@ -117,10 +111,21 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!m_reactToMouseInput)
             return;
 
-        if (!m_hasBaseTransform)
+        StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!m_reactToMouseInput)
             return;
 
-        StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
+        if (m_hoverRoutine != null)
+            StopCoroutine(m_hoverRoutine);
+
+        if (m_moveRoutine != null)
+            StopCoroutine(m_moveRoutine);
+
+        OnCardClicked?.Invoke(this, this);
     }
 
     private void StartHoverTween(Vector3 targetPos, Vector3 targetScale)
@@ -175,5 +180,41 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         localTarget.y = Mathf.Min(localTarget.y, m_maxLocalY);
 
         return localTarget;
+    }
+
+    public void MoveCard(Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
+    {
+        m_baseLocalPosition = targetPos;
+        m_moveRoutine = StartCoroutine(MoveCardCoroutine(startPos, startRot, targetPos, targetRot, duration, delay));
+    }
+
+    private IEnumerator MoveCardCoroutine(Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
+    {
+        Transform cardTransform = transform;
+
+        if (delay > 0f)
+            yield return new WaitForSeconds(delay);
+
+        float time = 0f;
+
+        while (time < duration)
+        {
+            if (cardTransform == null)
+                yield break;
+
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / duration);
+
+            cardTransform.localPosition = Vector3.Lerp(startPos, targetPos, t);
+            cardTransform.localRotation = Quaternion.Slerp(startRot, targetRot, t);
+
+            yield return null;
+        }
+
+        if (cardTransform != null)
+        {
+            cardTransform.localPosition = targetPos;
+            cardTransform.localRotation = targetRot;
+        }
     }
 }

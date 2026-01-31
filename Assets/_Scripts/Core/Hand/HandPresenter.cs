@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class HandPresenter : MonoBehaviour
@@ -19,15 +18,20 @@ public class HandPresenter : MonoBehaviour
     [SerializeField] private float m_drawDuration = 0.3f;
     [SerializeField] private float m_drawDelayBetweenCards = 0.05f;
 
+    [Header("Relayout Animation")]
+    [SerializeField] private float m_relayoutDuration = 0.2f;
+
     private List<CardPresenter> m_cardsInHand;
     private HandModel m_handModel;
+    private BoardModel m_boardModel;
 
     private bool m_displayCardHover;
     private bool m_reactToMouseInput;
 
-    public void Initialize(HandModel model, bool hideCards = false, bool reactToMouseInput = true)
+    public void Initialize(HandModel model, BoardModel boardModel, bool hideCards = false, bool reactToMouseInput = true)
     {
         m_handModel = model;
+        m_boardModel = boardModel;
         m_handModel.OnHandChanged += HandleOnHandChanged;
         m_cardsInHand = new List<CardPresenter>();
 
@@ -47,140 +51,84 @@ public class HandPresenter : MonoBehaviour
             instance.Initialize(model, m_displayCardHover, m_reactToMouseInput);
 
             m_cardsInHand.Add(instance);
+            instance.OnCardClicked += HandleOnCardClicked;
         }
 
         ApplyFanLayoutFromDeck();
     }
 
+    private void HandleOnCardClicked(object sender, CardPresenter card)
+    {
+        card.OnCardClicked -= HandleOnCardClicked;
+        m_cardsInHand.Remove(card);
+
+        m_boardModel.Add(card);
+
+        AnimateRelayout();
+    }
+
     private void ApplyFanLayoutFromDeck()
     {
         int count = m_cardsInHand.Count;
-        if (count == 0)
-            return;
+        if (count == 0) return;
 
-        // If deck is not assigned, just place instantly like before
-        if (m_deck == null)
-        {
-            ApplyFanLayoutInstant();
-            return;
-        }
-
-        // We want to animate each card from the deck to its final position
-        float totalWidth = (count - 1) * m_cardSpacing;
-        float startX = -totalWidth * 0.5f;
-
-        // Parent for local space
         Transform parent = transform;
+
+        Vector3 deckLocalPos = parent.InverseTransformPoint(m_deck.position);
+        Quaternion deckLocalRot = Quaternion.Inverse(parent.rotation) * m_deck.rotation;
 
         for (int i = 0; i < count; i++)
         {
             CardPresenter card = m_cardsInHand[i];
             Transform tr = card.transform;
 
-            // Calculate final position & rotation for this card in hand
-            Vector3 targetPos;
-            Quaternion targetRot;
-
-            if (count == 1)
-            {
-                targetPos = new Vector3(0f, m_offsetY, 0f);
-                targetRot = Quaternion.identity;
-            }
-            else
-            {
-                float x = startX + i * m_cardSpacing;
-                float t = Mathf.Lerp(-1f, 1f, (float)i / (count - 1));
-
-                float angle = -t * m_maxFanAngle;
-                float yOffset = -Mathf.Pow(Mathf.Abs(t), 2f) * m_curveHeight;
-
-                targetPos = new Vector3(x, yOffset + m_offsetY, 0f);
-                targetRot = Quaternion.Euler(0f, 0f, angle);
-            }
-
-            // Start at the deck position/rotation
-            Vector3 deckLocalPos = parent.InverseTransformPoint(m_deck.position);
-            Quaternion deckLocalRot = Quaternion.Inverse(parent.rotation) * m_deck.rotation;
+            GetFanTarget(i, count, out Vector3 targetPos, out Quaternion targetRot);
 
             tr.localPosition = deckLocalPos;
             tr.localRotation = deckLocalRot;
 
-            // Animate to target
             float delay = i * m_drawDelayBetweenCards;
-            StartCoroutine(AnimateCardToHand(card, deckLocalPos, deckLocalRot, targetPos, targetRot, delay));
+            card.MoveCard(deckLocalPos, deckLocalRot, targetPos, targetRot, m_drawDuration, 0f);
         }
     }
 
-    private IEnumerator AnimateCardToHand(
-        CardPresenter card,
-        Vector3 startPos,
-        Quaternion startRot,
-        Vector3 targetPos,
-        Quaternion targetRot,
-        float delay)
+    private void GetFanTarget(int index, int count, out Vector3 pos, out Quaternion rot)
     {
-        if (m_reactToMouseInput)
-            card.ReactToMouseInput = false;
-
-        Transform cardTransform = card.transform;
-
-        if (delay > 0f)
-            yield return new WaitForSeconds(delay);
-
-        float time = 0f;
-
-        while (time < m_drawDuration)
+        if (count <= 1)
         {
-            // Card might be destroyed while animating
-            if (cardTransform == null)
-                yield break;
-
-            time += Time.deltaTime;
-            float t = Mathf.Clamp01(time / m_drawDuration);
-
-            cardTransform.localPosition = Vector3.Lerp(startPos, targetPos, t);
-            cardTransform.localRotation = Quaternion.Slerp(startRot, targetRot, t);
-
-            yield return null;
+            pos = new Vector3(0f, m_offsetY, 0f);
+            rot = Quaternion.identity;
+            return;
         }
-
-        if (cardTransform != null)
-        {
-            cardTransform.localPosition = targetPos;
-            cardTransform.localRotation = targetRot;
-        }
-
-        if (m_reactToMouseInput)
-            card.ReactToMouseInput = true;
-    }
-
-    // Fallback / non-animated layout
-    private void ApplyFanLayoutInstant()
-    {
-        int count = m_cardsInHand.Count;
-        if (count == 0) return;
 
         float totalWidth = (count - 1) * m_cardSpacing;
         float startX = -totalWidth * 0.5f;
 
-        if (count == 1)
-        {
-            m_cardsInHand[0].transform.localRotation = Quaternion.identity;
-            m_cardsInHand[0].transform.localPosition = new Vector3(0f, m_offsetY, 0f);
-            return;
-        }
+        float x = startX + index * m_cardSpacing;
+        float t = Mathf.Lerp(-1f, 1f, (float)index / (count - 1));
+
+        float angle = -t * m_maxFanAngle;
+        float yOffset = -Mathf.Pow(Mathf.Abs(t), 2f) * m_curveHeight;
+
+        pos = new Vector3(x, yOffset + m_offsetY, 0f);
+        rot = Quaternion.Euler(0f, 0f, angle);
+    }
+
+    private void AnimateRelayout()
+    {
+        int count = m_cardsInHand.Count;
+        if (count == 0) return;
 
         for (int i = 0; i < count; i++)
         {
-            float x = startX + i * m_cardSpacing;
-            float t = Mathf.Lerp(-1f, 1f, (float)i / (count - 1));
+            CardPresenter card = m_cardsInHand[i];
+            Transform tr = card.transform;
 
-            float angle = -t * m_maxFanAngle;
-            float yOffset = -Mathf.Pow(Mathf.Abs(t), 2f) * m_curveHeight;
+            Vector3 startPos = tr.localPosition;
+            Quaternion startRot = tr.localRotation;
 
-            Transform tr = m_cardsInHand[i].transform;
-            tr.localPosition = new Vector3(x, yOffset + m_offsetY, 0f);
-            tr.localRotation = Quaternion.Euler(0f, 0f, angle);
+            GetFanTarget(i, count, out Vector3 targetPos, out Quaternion targetRot);
+            card.MoveCard(startPos, startRot, targetPos, targetRot, m_relayoutDuration, 0f);
         }
     }
 }
