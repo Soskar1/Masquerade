@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,11 +16,15 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Image m_scoreImage;
     [SerializeField] private Image m_costImage;
 
+    [SerializeField] private ScoreMessage m_scoreMessagePrefab;
+
     [Header("Hover Settings")]
     [SerializeField] private float m_hoverScaleMultiplier = 1.2f;
     [SerializeField] private float m_hoverOffset = 40f;
     [SerializeField] private float m_hoverDuration = 0.15f;
     [SerializeField] private float m_maxLocalY = 120f;
+
+    [SerializeField] private float m_revealDuration = 4f;
 
     [SerializeField] private Animator m_animator;
 
@@ -252,6 +257,35 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_costImage.enabled = true;
 
         m_animator.enabled = true;
+        
+    }
+
+    public Task RevealAsync()
+    {
+        var tcs = new TaskCompletionSource<bool>();
+        StartCoroutine(RevealRoutine(tcs));
+        return tcs.Task;
+    }
+
+    private IEnumerator RevealRoutine(TaskCompletionSource<bool> tcs)
+    {
+        m_cardCover.SetActive(false);
+        m_maskImage.enabled = true;
+        m_backgroundImage.enabled = true;
+        m_scoreImage.enabled = true;
+        m_costImage.enabled = true;
+        m_animator.enabled = true;
         m_animator.SetTrigger("Reveal");
+        yield return new WaitForSeconds(m_revealDuration);
+
+        tcs.SetResult(true);
+    }
+
+    public ScoreMessage SpawnScoreText()
+    {
+        ScoreMessage message = Instantiate(m_scoreMessagePrefab, transform.position, Quaternion.identity, transform.parent);
+        message.Initialize(Model.CurrentScore);
+
+        return message;
     }
 }

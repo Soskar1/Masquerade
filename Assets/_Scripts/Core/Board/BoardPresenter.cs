@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,8 @@ public class BoardPresenter : MonoBehaviour
     [SerializeField] private CardPresenter m_ghostCardPrefab;
     [SerializeField] private float m_cardMovementDuration;
 
+    [SerializeField] private float m_revealStagger = 0.05f;
+
     private Dictionary<CardPresenter, CardPresenter> m_cardToPlaceholder;
 
     private EntityModel m_entity;
@@ -15,6 +19,9 @@ public class BoardPresenter : MonoBehaviour
     private HandModel m_hand;
     private ManaModel m_mana;
     private BattleModel m_battle;
+
+    public BoardModel BoardModel => m_board;
+    public List<CardPresenter> Cards => m_cardToPlaceholder.Keys.ToList();
 
     private bool m_canInteractWithCards = false;
 
@@ -38,12 +45,12 @@ public class BoardPresenter : MonoBehaviour
         m_canInteractWithCards = true;
     }
 
-    private void HandleOnTurnEnded(object sender, System.EventArgs e)
+    private async void HandleOnTurnEnded(object sender, System.EventArgs e)
     {
         m_canInteractWithCards = false;
 
         if (!m_entity.IsPlayer)
-            Reveal();
+            await RevealCardsAsync();
     }
 
     private void OnDisable()
@@ -114,9 +121,17 @@ public class BoardPresenter : MonoBehaviour
         }
     }
 
-    public void Reveal()
+    public async Task RevealCardsAsync()
     {
-        foreach (CardPresenter card in m_cardToPlaceholder.Keys)
-            card.Reveal();
+        var cards = m_cardToPlaceholder.Keys.ToList();
+        var tasks = new List<Task>(cards.Count);
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            tasks.Add(cards[i].RevealAsync());
+            // await Task.Delay((int)(m_revealStagger * 1000f)); // stagger start
+        }
+
+        await Task.WhenAll(tasks);
     }
 }
