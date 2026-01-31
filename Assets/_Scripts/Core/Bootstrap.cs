@@ -4,14 +4,16 @@ using UnityEngine;
 public class Bootstrap : MonoBehaviour
 {
     [SerializeField] private HandPresenter m_handPresenter;
-    [SerializeField] private CardData m_data;
+    [SerializeField] private List<CardData> m_cardPool;
+    [SerializeField] private DeckModel m_deckModel;
 
     public void Awake()
     {
-        HandModel handModel = new HandModel(5);
+        DeckModel deck = new DeckModel(m_cardPool);
+
+        HandModel handModel = new HandModel(deck, 5);
         m_handPresenter.Initialize(handModel);
 
-        CardModel card = new CardModel(m_data);
-        handModel.DrawCards(new List<CardModel>() { card, card, card, card, card });
+        handModel.DrawCards();
     }
 }

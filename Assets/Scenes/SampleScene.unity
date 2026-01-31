@@ -1187,7 +1187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handPresenter: {fileID: 1865957143}
-  m_data: {fileID: 11400000, guid: aa65b8d478340e041b2fd64f8a240c40, type: 2}
+  m_cardPool:
+  - {fileID: 11400000, guid: aa65b8d478340e041b2fd64f8a240c40, type: 2}
 --- !u!4 &1331707530
 Transform:
   m_ObjectHideFlags: 0

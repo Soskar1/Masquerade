@@ -1,23 +1,32 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class HandModel
 {
     private int m_maxSize;
     private List<CardModel> m_cards;
+    private readonly DeckModel m_deck;
 
     public event EventHandler<List<CardModel>> OnHandChanged;
 
-    public HandModel(int maxSize)
+    public HandModel(DeckModel deck, int maxSize)
     {
         m_maxSize = maxSize;
-        m_cards = new List<CardModel>();
+        m_cards = new List<CardModel>(m_maxSize);
+        m_deck = deck;
     }
 
-    public void DrawCards(List<CardModel> cards)
+    public void DrawCards()
     {
-        m_cards = cards.Take(m_maxSize).ToList();
+        List<CardModel> cards = new List<CardModel>();
+
+        for (int i = 0; i < m_maxSize; ++i)
+        {
+            CardModel card = m_deck.DrawCard();
+            cards.Add(card);
+        }
+
+        m_cards = cards;
         OnHandChanged?.Invoke(this, m_cards);
     }
 }
