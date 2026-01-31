@@ -14,10 +14,6 @@ public class HandPresenter : MonoBehaviour
     // Note: A hacky way to place cards on the Y axis
     [SerializeField] private float m_offsetY = 100f;
 
-    [Header("Draw Animation")]
-    [SerializeField] private float m_drawDuration = 0.3f;
-    [SerializeField] private float m_drawDelayBetweenCards = 0.05f;
-
     [Header("Relayout Animation")]
     [SerializeField] private float m_relayoutDuration = 0.2f;
 
@@ -27,34 +23,47 @@ public class HandPresenter : MonoBehaviour
 
     private bool m_displayCardHover;
     private bool m_reactToMouseInput;
+    private bool m_isHoverAnimationEnabled;
 
-    public void Initialize(HandModel model, BoardModel boardModel, bool hideCards = false, bool reactToMouseInput = true)
+    public void Initialize(HandModel model, BoardModel boardModel, bool hideCards = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
     {
         m_handModel = model;
         m_boardModel = boardModel;
-        m_handModel.OnHandChanged += HandleOnHandChanged;
+        m_handModel.OnCardAdded += HandleOnCardAdded;
         m_cardsInHand = new List<CardPresenter>();
 
         m_displayCardHover = hideCards;
         m_reactToMouseInput = reactToMouseInput;
+        m_isHoverAnimationEnabled = isHoverAnimationEnabled;
     }
 
-    private void HandleOnHandChanged(object sender, List<CardModel> models)
+    private void OnDisable()
     {
-        // NOTE:
-        // This code assumes OnHandChanged gives you only *new* cards to add.
-        // If it's the full hand every time, you'll want to Clear & rebuild instead.
+        m_handModel.OnCardAdded -= HandleOnCardAdded;
+    }
 
-        foreach (CardModel model in models)
+    private void HandleOnCardAdded(object sender, CardModel model)
+    {
+        CardPresenter presenter = null;
+
+        if (!CardPresenterRegistry.TryGet(model, out presenter))
         {
-            CardPresenter instance = Instantiate(m_cardPresenterPrefab, transform);
-            instance.Initialize(model, m_displayCardHover, m_reactToMouseInput);
+            presenter = Instantiate(m_cardPresenterPrefab, m_deck.position, Quaternion.identity, transform);
+            presenter.Initialize(model, m_displayCardHover, m_reactToMouseInput, m_isHoverAnimationEnabled);
+            CardPresenterRegistry.Register(model, presenter);
+        }
+        else
+        {
+            presenter.transform.SetParent(transform, true);
 
-            m_cardsInHand.Add(instance);
-            instance.OnCardClicked += HandleOnCardClicked;
+            if (m_isHoverAnimationEnabled)
+                presenter.IsHoverAnimationEnabled = true;
         }
 
-        ApplyFanLayoutFromDeck();
+        m_cardsInHand.Add(presenter);
+        presenter.OnCardClicked += HandleOnCardClicked;
+
+        AnimateRelayout();
     }
 
     private void HandleOnCardClicked(object sender, CardPresenter card)
@@ -62,34 +71,9 @@ public class HandPresenter : MonoBehaviour
         card.OnCardClicked -= HandleOnCardClicked;
         m_cardsInHand.Remove(card);
 
-        m_boardModel.Add(card);
+        m_boardModel.Add(card.Model);
 
         AnimateRelayout();
-    }
-
-    private void ApplyFanLayoutFromDeck()
-    {
-        int count = m_cardsInHand.Count;
-        if (count == 0) return;
-
-        Transform parent = transform;
-
-        Vector3 deckLocalPos = parent.InverseTransformPoint(m_deck.position);
-        Quaternion deckLocalRot = Quaternion.Inverse(parent.rotation) * m_deck.rotation;
-
-        for (int i = 0; i < count; i++)
-        {
-            CardPresenter card = m_cardsInHand[i];
-            Transform tr = card.transform;
-
-            GetFanTarget(i, count, out Vector3 targetPos, out Quaternion targetRot);
-
-            tr.localPosition = deckLocalPos;
-            tr.localRotation = deckLocalRot;
-
-            float delay = i * m_drawDelayBetweenCards;
-            card.MoveCard(deckLocalPos, deckLocalRot, targetPos, targetRot, m_drawDuration, 0f);
-        }
     }
 
     private void GetFanTarget(int index, int count, out Vector3 pos, out Quaternion rot)
