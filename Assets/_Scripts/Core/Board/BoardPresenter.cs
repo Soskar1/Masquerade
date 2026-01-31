@@ -10,21 +10,23 @@ public class BoardPresenter : MonoBehaviour
 
     private Dictionary<CardPresenter, CardPresenter> m_cardToPlaceholder;
 
-    private BoardModel m_model;
+    private EntityModel m_entity;
+    private BoardModel m_board;
     private HandModel m_hand;
     private ManaModel m_mana;
     private BattleModel m_battle;
 
     private bool m_canInteractWithCards = false;
 
-    public void Initialize(BoardModel model, HandModel hand, ManaModel mana, BattleModel battle)
+    public void Initialize(EntityModel entity, BattleModel battle)
     {
-        m_model = model;
-        m_hand = hand;
-        m_mana = mana;
+        m_entity = entity;
+        m_board = entity.Board;
+        m_hand = entity.Hand;
+        m_mana = entity.Mana;
         m_battle = battle;
-        model.OnCardAdded += HandleOnCardAdded;
-        model.OnCardRemoved += HandleOnCardRemoved;
+        m_board.OnCardAdded += HandleOnCardAdded;
+        m_board.OnCardRemoved += HandleOnCardRemoved;
         m_battle.OnTurnStarted += HandleOnTurnStarted;
         m_battle.OnTurnEnded += HandleOnTurnEnded;
 
@@ -39,12 +41,15 @@ public class BoardPresenter : MonoBehaviour
     private void HandleOnTurnEnded(object sender, System.EventArgs e)
     {
         m_canInteractWithCards = false;
+
+        if (!m_entity.IsPlayer)
+            Reveal();
     }
 
     private void OnDisable()
     {
-        m_model.OnCardAdded -= HandleOnCardAdded;
-        m_model.OnCardRemoved -= HandleOnCardRemoved;
+        m_board.OnCardAdded -= HandleOnCardAdded;
+        m_board.OnCardRemoved -= HandleOnCardRemoved;
         m_battle.OnTurnStarted -= HandleOnTurnStarted;
         m_battle.OnTurnEnded -= HandleOnTurnEnded;
     }
@@ -66,13 +71,19 @@ public class BoardPresenter : MonoBehaviour
         presenter.OnCardClicked += HandleOnCardClicked;
     }
 
-    private void HandleOnCardRemoved(object sender, CardModel card)
+    private void HandleOnCardRemoved(object sender, OnCardRemovedEventArgs args)
     {
-        CardPresenterRegistry.TryGet(card, out CardPresenter presenter);
+        CardPresenterRegistry.TryGet(args.CardModel, out CardPresenter presenter);
 
         CardPresenter placeholder = m_cardToPlaceholder[presenter];
         m_cardToPlaceholder.Remove(presenter);
         GameObject.Destroy(placeholder.gameObject);
+
+        if (args.DeleteFromGame)
+        {
+            CardPresenterRegistry.Unregister(args.CardModel);
+            GameObject.Destroy(presenter.gameObject);
+        }
 
         RealignCards();
     }
@@ -86,7 +97,7 @@ public class BoardPresenter : MonoBehaviour
 
         m_mana.CurrentMana += presenter.Model.CurrentCost;
 
-        m_model.Remove(presenter.Model);
+        m_board.Remove(presenter.Model);
         m_hand.Add(presenter.Model);
     }
 

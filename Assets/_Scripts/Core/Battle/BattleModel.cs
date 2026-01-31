@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class BattleModel
 {
@@ -18,6 +19,12 @@ public class BattleModel
 
     public async Task StartTurn()
     {
+        m_player.Mana.Restore();
+        m_enemy.Mana.Restore();
+
+        m_player.Board.Clear();
+        m_enemy.Board.Clear();
+
         m_player.Hand.DrawCards();
         m_enemy.Hand.DrawCards();
 
@@ -56,8 +63,30 @@ public class BattleModel
         return cards;
     }
 
-    public void EndTurn()
+    public async Task EndTurn()
     {
         OnTurnEnded?.Invoke(this, EventArgs.Empty);
+
+        int playerScore = CalculateScore(m_player.Board);
+        int enemyScore = CalculateScore(m_enemy.Board);
+
+        int diff = Mathf.Abs(playerScore - enemyScore);
+
+        if (playerScore > enemyScore)
+            m_enemy.Health.CurrentHealth -= diff;
+        else
+            m_player.Health.CurrentHealth -= diff;
+
+        await StartTurn();
+    }
+
+    private int CalculateScore(BoardModel board)
+    {
+        int score = 0;
+
+        foreach (CardModel card in board.SelectedCards)
+            score += card.CurrentScore;
+
+        return score;
     }
 }

@@ -27,7 +27,7 @@ public class HandModel
 
     public void DrawCards()
     {
-        for (int i = 0; i < m_maxSize; ++i)
+        for (int i = m_cards.Count; i < m_maxSize; ++i)
         {
             CardModel card = m_deck.DrawCard();
             Add(card);

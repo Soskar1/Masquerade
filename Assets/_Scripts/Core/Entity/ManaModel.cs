@@ -40,4 +40,6 @@ public class ManaModel
         m_maxMana = mana;
         m_currentMana = mana;
     }
+
+    public void Restore() => CurrentMana = MaxMana;
 }

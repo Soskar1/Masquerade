@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &287126210 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6753878490525507510, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
-  m_PrefabInstance: {fileID: 1804066282}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 600d6442a7573174ca3bc547c58fb525, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &325318481
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +390,7 @@ GameObject:
   - component: {fileID: 1003154323}
   - component: {fileID: 1003154326}
   m_Layer: 5
-  m_Name: BattlePresenter
+  m_Name: EndOfTurnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,7 +523,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_endTurnButton: {fileID: 1003154323}
-  m_enemyBoard: {fileID: 287126210}
 --- !u!1 &1331707528
 GameObject:
   m_ObjectHideFlags: 0
