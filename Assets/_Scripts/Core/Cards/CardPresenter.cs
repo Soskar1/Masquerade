@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,7 +10,6 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Image m_maskImage;
     [SerializeField] private Image m_borderImage;
     [SerializeField] private Image m_backgroundImage;
-
     [SerializeField] private TextMeshProUGUI m_scoreText;
     [SerializeField] private TextMeshProUGUI m_costText;
     [SerializeField] private GameObject m_cardCover;
@@ -19,6 +19,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private float m_hoverOffset = 40f;
     [SerializeField] private float m_hoverDuration = 0.15f;
     [SerializeField] private float m_maxLocalY = 120f;
+
+    [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
+    private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
 
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
@@ -36,6 +39,13 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         set => m_reactToMouseInput = value;
     }
 
+    private void Awake()
+    {
+        m_backgroundSpritesDict = new Dictionary<CardColor, CardColorBackgroundSprite>();
+        foreach (CardColorBackgroundSprite bgSprite in m_backgroundSprites)
+            m_backgroundSpritesDict.Add(bgSprite.Color, bgSprite);
+    }
+
     public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true)
     {
         m_model = model;
@@ -43,7 +53,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         
         m_maskImage.sprite = model.CardData.MaskSprite;
         m_borderImage.sprite = model.CardData.BorderSprite;
-        m_backgroundImage.sprite = model.CardData.BackgroundSprite;
+        m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
 
         m_scoreText.text = model.CurrentScore.ToString();
         m_costText.text = model.CurrentCost.ToString();

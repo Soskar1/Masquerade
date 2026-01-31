@@ -638,6 +638,15 @@ MonoBehaviour:
   m_hoverOffset: 40
   m_hoverDuration: 0.15
   m_maxLocalY: 120
+  m_backgroundSprites:
+  - m_color: 0
+    m_sprite: {fileID: 21300000, guid: 30cddc99c09a7d24d85017b547ff4685, type: 3}
+  - m_color: 1
+    m_sprite: {fileID: 21300000, guid: 5b9605a6b9aec684fb49850e46a72b1c, type: 3}
+  - m_color: 3
+    m_sprite: {fileID: 21300000, guid: 0a1c1212e53eafc4980f6770fefddb7d, type: 3}
+  - m_color: 2
+    m_sprite: {fileID: 21300000, guid: 2d155e976a88b1e47b13282bb7e7d2d3, type: 3}
 --- !u!1 &6531343552736524193
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System;
 public class CardModel
 {
     public CardData CardData { get; private set; }
+    public CardColor CardColor { get; private set; }
 
     private int m_currentScore;
     public int CurrentScore
@@ -33,10 +34,12 @@ public class CardModel
     public event EventHandler<int> OnScoreChanged;
     public event EventHandler<int> OnCostChanged;
 
-    public CardModel(CardData data)
+    public CardModel(CardData data, CardColor cardColor)
     {
         CardData = data;
         CurrentScore = data.Score;
         CurrentCost = data.Cost;
+
+        CardColor = cardColor;
     }
 }
