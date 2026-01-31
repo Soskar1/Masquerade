@@ -10,9 +10,10 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Image m_maskImage;
     [SerializeField] private Image m_borderImage;
     [SerializeField] private Image m_backgroundImage;
-    [SerializeField] private TextMeshProUGUI m_scoreText;
-    [SerializeField] private TextMeshProUGUI m_costText;
     [SerializeField] private GameObject m_cardCover;
+
+    [SerializeField] private Image m_scoreImage;
+    [SerializeField] private TextMeshProUGUI m_costText;
 
     [Header("Hover Settings")]
     [SerializeField] private float m_hoverScaleMultiplier = 1.2f;
@@ -22,6 +23,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
+
+    [SerializeField] private List<CardScoreSprite> m_scoreSprites;
+    private Dictionary<CardScore, CardScoreSprite> m_scoreSpritesDict;
 
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
@@ -42,8 +46,14 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void Awake()
     {
         m_backgroundSpritesDict = new Dictionary<CardColor, CardColorBackgroundSprite>();
+
         foreach (CardColorBackgroundSprite bgSprite in m_backgroundSprites)
             m_backgroundSpritesDict.Add(bgSprite.Color, bgSprite);
+
+        m_scoreSpritesDict = new Dictionary<CardScore, CardScoreSprite>();
+
+        foreach (CardScoreSprite bgSprite in m_scoreSprites)
+            m_scoreSpritesDict.Add(bgSprite.Score, bgSprite);
     }
 
     public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true)
@@ -54,11 +64,15 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_maskImage.sprite = model.CardData.MaskSprite;
         m_borderImage.sprite = model.CardData.BorderSprite;
         m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
+        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore)model.CurrentScore].Sprite;
 
-        m_scoreText.text = model.CurrentScore.ToString();
         m_costText.text = model.CurrentCost.ToString();
 
         m_cardCover.SetActive(displayCardCover);
+        m_maskImage.enabled = !displayCardCover;
+        m_backgroundImage.enabled = !displayCardCover;
+        m_scoreImage.enabled = !displayCardCover;
+        m_costText.enabled = !displayCardCover;
 
         m_model.OnScoreChanged += HandleOnScoreChanged;
         m_model.OnCostChanged += HandleOnCostChanged;
@@ -85,7 +99,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void HandleOnScoreChanged(object sender, int score)
     {
-        m_scoreText.text = score.ToString();
+        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore)score].Sprite;
     }
 
     private void HandleOnCostChanged(object sender, int cost)

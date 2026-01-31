@@ -12,7 +12,7 @@ public class DeckModel
         CardData cardData = m_cards[Random.Range(0, m_cards.Count)];
 
         int value = Random.Range(0, System.Enum.GetValues(typeof(CardColor)).Length);
-        CardColor color = (CardColor)value;
+        CardColor color = (CardColor) value;
 
         return new CardModel(cardData, color);
     }

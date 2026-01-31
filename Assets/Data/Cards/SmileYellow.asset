@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e0599c948ccaa43980b63ba6f0b10b, type: 3}
   m_Name: SmileYellow
   m_EditorClassIdentifier: 
-  m_maskSprite: {fileID: 21300000, guid: 7ba3f34a876714340a30f2eafaaf3f8d, type: 3}
-  m_borderSprite: {fileID: 21300000, guid: 673476d4105af83438b692920f20f324, type: 3}
-  m_backgroundSprite: {fileID: 21300000, guid: 0a1c1212e53eafc4980f6770fefddb7d, type: 3}
+  m_maskSprite: {fileID: 21300000, guid: 84959a241ad076049b32db924349eda8, type: 3}
+  m_borderSprite: {fileID: 21300000, guid: 56c30246ae4785f46a20e052b56b92f2, type: 3}
   m_score: 5
   m_cost: 3
