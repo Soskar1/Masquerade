@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07e0599c948ccaa43980b63ba6f0b10b, type: 3}
-  m_Name: SmileYellow
+  m_Name: Tricky
   m_EditorClassIdentifier: 
-  m_maskSprite: {fileID: 21300000, guid: 84959a241ad076049b32db924349eda8, type: 3}
-  m_borderSprite: {fileID: 21300000, guid: 56c30246ae4785f46a20e052b56b92f2, type: 3}
-  m_score: 15
+  m_maskSprite: {fileID: 21300000, guid: 842a0080edca9e24287c0ec35508fe50, type: 3}
+  m_borderSprite: {fileID: 21300000, guid: dc962667a032d2349a643c4cd16a257b, type: 3}
+  m_score: 10
   m_cost: 3

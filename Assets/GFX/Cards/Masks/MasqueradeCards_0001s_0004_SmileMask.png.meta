@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 84959a241ad076049b32db924349eda8
+guid: 8a252081d795bf648b92c6e2b3f627ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1367804308571199878
-    second: MasqueradeCards_0000s_0000_SmileMask_0
+      213: 5073270973603204741
+    second: MasqueradeCards_0001s_0004_SmileMask_0
   - first:
-      213: -6013845923015041251
-    second: MasqueradeCards_0000s_0000_SmileMask_1
+      213: 8620261858463075643
+    second: MasqueradeCards_0001s_0004_SmileMask_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MasqueradeCards_0000s_0000_SmileMask_0
+      name: MasqueradeCards_0001s_0004_SmileMask_0
       rect:
         serializedVersion: 2
         x: 26
-        y: 99
+        y: 98
         width: 43
-        height: 14
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68992ae85ca6bf210800000000000000
-      internalID: 1367804308571199878
+      spriteID: 58e4be63211e76640800000000000000
+      internalID: 5073270973603204741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MasqueradeCards_0000s_0000_SmileMask_1
+      name: MasqueradeCards_0001s_0004_SmileMask_1
       rect:
         serializedVersion: 2
         x: 28
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d1fd1c8eef68a8ca0800000000000000
-      internalID: -6013845923015041251
+      spriteID: b3d4a88fc7251a770800000000000000
+      internalID: 8620261858463075643
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MasqueradeCards_0000s_0000_SmileMask_0: 1367804308571199878
-      MasqueradeCards_0000s_0000_SmileMask_1: -6013845923015041251
+      MasqueradeCards_0001s_0004_SmileMask_0: 5073270973603204741
+      MasqueradeCards_0001s_0004_SmileMask_1: 8620261858463075643
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
