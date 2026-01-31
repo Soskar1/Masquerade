@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class EntityModel
 {
     public HealthModel Health { get; private set; }
@@ -10,7 +12,7 @@ public class EntityModel
     public EntityModel(EntityData data, bool isPlayer)
     {
         Health = new HealthModel(data.Health);
-        Deck = new DeckModel(data.CardPool);
+        Deck = new DeckModel(new List<CardData>(data.CardPool));
         Hand = new HandModel(Deck, data.HandSize);
         Mana = new ManaModel(data.MaxMana);
         Board = new BoardModel();

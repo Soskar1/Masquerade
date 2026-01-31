@@ -39,7 +39,11 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
-    public Vector3 BaseLocalScale => m_baseLocalScale;
+    public Vector3 BaseLocalScale
+    {
+        get => m_baseLocalScale;
+        set => m_baseLocalScale = value;
+    }
 
     private Coroutine m_hoverRoutine;
     private Coroutine m_moveRoutine;
@@ -57,6 +61,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
     public event EventHandler<CardPresenter> OnCardClicked;
+
+    private TaskCompletionSource<bool> m_cardMoved;
 
     private void Awake()
     {
@@ -130,6 +136,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!IsHoverAnimationEnabled)
             return;
 
+        //if (m_baseLocalScale == null)
+        //    m_baseLocalScale = transform.localScale;
+
         Vector3 targetScale = m_baseLocalScale * m_hoverScaleMultiplier;
         Vector3 targetPos = CalculateHoverPosition(m_hoverOffset);
 
@@ -141,6 +150,11 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!IsHoverAnimationEnabled)
             return;
 
+        StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
+    }
+
+    public void HoverToInitialPosition()
+    {
         StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
     }
 
@@ -218,6 +232,15 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_moveRoutine = StartCoroutine(MoveCardCoroutine(startPos, startRot, targetPos, targetRot, duration, delay));
     }
 
+    public async Task MoveCardAsync(Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
+    {
+        m_cardMoved = new TaskCompletionSource<bool>();
+        m_baseLocalPosition = targetPos;
+        m_moveRoutine = StartCoroutine(MoveCardCoroutine(startPos, startRot, targetPos, targetRot, duration, delay));
+
+        await m_cardMoved.Task;
+    }
+
     private IEnumerator MoveCardCoroutine(Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
     {
         Transform cardTransform = transform;
@@ -246,18 +269,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             cardTransform.localPosition = targetPos;
             cardTransform.localRotation = targetRot;
         }
-    }
 
-    public void Reveal()
-    {
-        m_cardCover.SetActive(false);
-        m_maskImage.enabled = true;
-        m_backgroundImage.enabled = true;
-        m_scoreImage.enabled = true;
-        m_costImage.enabled = true;
-
-        m_animator.enabled = true;
-        
+        if (m_cardMoved != null)
+            m_cardMoved.SetResult(true);
     }
 
     public Task RevealAsync()
@@ -274,8 +288,10 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_backgroundImage.enabled = true;
         m_scoreImage.enabled = true;
         m_costImage.enabled = true;
+
         m_animator.enabled = true;
         m_animator.SetTrigger("Reveal");
+        
         yield return new WaitForSeconds(m_revealDuration);
 
         tcs.SetResult(true);
