@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Image m_cardImage;
+    [SerializeField] private Image m_maskImage;
+    [SerializeField] private Image m_borderImage;
+    [SerializeField] private Image m_backgroundImage;
+
     [SerializeField] private TextMeshProUGUI m_scoreText;
     [SerializeField] private TextMeshProUGUI m_costText;
     [SerializeField] private GameObject m_cardCover;
@@ -32,7 +35,10 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_model = model;
         m_reactToMouseInput = reactToMouseInput;
         
-        m_cardImage.sprite = model.CardData.MaskSprite;
+        m_maskImage.sprite = model.CardData.MaskSprite;
+        m_borderImage.sprite = model.CardData.BorderSprite;
+        m_backgroundImage.sprite = model.CardData.BackgroundSprite;
+
         m_scoreText.text = model.CurrentScore.ToString();
         m_costText.text = model.CurrentCost.ToString();
 
