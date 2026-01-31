@@ -441,6 +441,7 @@ MonoBehaviour:
   m_hoverOffset: 40
   m_hoverDuration: 0.15
   m_maxLocalY: 120
+  m_revealDuration: 3
   m_animator: {fileID: 371002264762179209}
   m_backgroundSprites:
   - m_color: 0

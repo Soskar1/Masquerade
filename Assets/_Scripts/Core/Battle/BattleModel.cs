@@ -11,6 +11,8 @@ public class BattleModel
     public event EventHandler OnTurnStarted;
     public event EventHandler OnTurnEnded;
 
+    public Func<Task> RevealBoardsAsync { get; set; }
+
     public BattleModel(EntityModel player, EntityModel enemy)
     {
         m_player = player;
@@ -65,18 +67,27 @@ public class BattleModel
 
     public async Task EndTurn()
     {
-        OnTurnEnded?.Invoke(this, EventArgs.Empty);
+        // 1) Run reveal animation and wait
+        if (RevealBoardsAsync != null)
+            await RevealBoardsAsync();
 
+        // 2) Calculate score
         int playerScore = CalculateScore(m_player.Board);
         int enemyScore = CalculateScore(m_enemy.Board);
 
+        // 3) Deal damage
         int diff = Mathf.Abs(playerScore - enemyScore);
+        if (diff > 0)
+        {
+            if (playerScore > enemyScore)
+                m_enemy.Health.CurrentHealth -= diff;
+            else
+                m_player.Health.CurrentHealth -= diff;
+        }
 
-        if (playerScore > enemyScore)
-            m_enemy.Health.CurrentHealth -= diff;
-        else
-            m_player.Health.CurrentHealth -= diff;
+        OnTurnEnded?.Invoke(this, EventArgs.Empty);
 
+        // 4) Start next turn (optional delay if you want)
         await StartTurn();
     }
 
