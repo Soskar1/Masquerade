@@ -4,6 +4,7 @@ public class EntityModel
     public HandModel Hand { get; private set; }
     public DeckModel Deck { get; private set; }
     public ManaModel Mana { get; private set; }
+    public BoardModel Board { get; private set; }
     public bool IsPlayer { get; private set; }
 
     public EntityModel(EntityData data, bool isPlayer)
@@ -12,6 +13,7 @@ public class EntityModel
         Deck = new DeckModel(data.CardPool);
         Hand = new HandModel(Deck, data.HandSize);
         Mana = new ManaModel(data.Mana);
+        Board = new BoardModel();
         IsPlayer = isPlayer;
     }
 }

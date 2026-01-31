@@ -24,13 +24,15 @@ public class HandPresenter : MonoBehaviour
 
     private List<CardPresenter> m_cardsInHand;
     private HandModel m_handModel;
+    private BoardModel m_boardModel;
 
     private bool m_displayCardHover;
     private bool m_reactToMouseInput;
 
-    public void Initialize(HandModel model, bool hideCards = false, bool reactToMouseInput = true)
+    public void Initialize(HandModel model, BoardModel boardModel, bool hideCards = false, bool reactToMouseInput = true)
     {
         m_handModel = model;
+        m_boardModel = boardModel;
         m_handModel.OnHandChanged += HandleOnHandChanged;
         m_cardsInHand = new List<CardPresenter>();
 
@@ -61,7 +63,7 @@ public class HandPresenter : MonoBehaviour
         card.OnCardClicked -= HandleOnCardClicked;
         m_cardsInHand.Remove(card);
 
-        GameObject.Destroy(card.gameObject);
+        m_boardModel.Add(card);
 
         AnimateRelayout();
     }

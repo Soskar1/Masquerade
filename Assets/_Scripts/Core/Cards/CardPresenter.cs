@@ -25,7 +25,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
 
     public Vector3 BaseLocalPosition { get; set; }
+    
     private Vector3 m_baseLocalScale;
+    public Vector3 BaseLocalScale => m_baseLocalScale;
 
     private Coroutine m_hoverRoutine;
 
