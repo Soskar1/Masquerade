@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class HandPresenter : MonoBehaviour
@@ -83,17 +82,13 @@ public class HandPresenter : MonoBehaviour
             CardPresenter card = m_cardsInHand[i];
             Transform tr = card.transform;
 
-            if (m_reactToMouseInput)
-                card.ReactToMouseInput = false;
-
             GetFanTarget(i, count, out Vector3 targetPos, out Quaternion targetRot);
-            card.BaseLocalPosition = targetPos;
 
             tr.localPosition = deckLocalPos;
             tr.localRotation = deckLocalRot;
 
             float delay = i * m_drawDelayBetweenCards;
-            StartCoroutine(AnimateCard(card, deckLocalPos, deckLocalRot, targetPos, targetRot, m_drawDuration, delay));
+            card.MoveCard(deckLocalPos, deckLocalRot, targetPos, targetRot, m_drawDuration, 0f);
         }
     }
 
@@ -133,41 +128,7 @@ public class HandPresenter : MonoBehaviour
             Quaternion startRot = tr.localRotation;
 
             GetFanTarget(i, count, out Vector3 targetPos, out Quaternion targetRot);
-            card.BaseLocalPosition = targetPos;
-            StartCoroutine(AnimateCard(card, startPos, startRot, targetPos, targetRot, m_relayoutDuration, 0f));
+            card.MoveCard(startPos, startRot, targetPos, targetRot, m_relayoutDuration, 0f);
         }
-    }
-
-    private IEnumerator AnimateCard(CardPresenter card, Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
-    {
-        Transform cardTransform = card.transform;
-
-        if (delay > 0f)
-            yield return new WaitForSeconds(delay);
-
-        float time = 0f;
-
-        while (time < duration)
-        {
-            if (cardTransform == null)
-                yield break;
-
-            time += Time.deltaTime;
-            float t = Mathf.Clamp01(time / duration);
-
-            cardTransform.localPosition = Vector3.Lerp(startPos, targetPos, t);
-            cardTransform.localRotation = Quaternion.Slerp(startRot, targetRot, t);
-
-            yield return null;
-        }
-
-        if (cardTransform != null)
-        {
-            cardTransform.localPosition = targetPos;
-            cardTransform.localRotation = targetRot;
-        }
-
-        if (m_reactToMouseInput)
-            card.ReactToMouseInput = true;
     }
 }

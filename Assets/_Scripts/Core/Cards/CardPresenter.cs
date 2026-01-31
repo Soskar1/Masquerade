@@ -24,12 +24,12 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
 
-    public Vector3 BaseLocalPosition { get; set; }
-    
+    private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
     public Vector3 BaseLocalScale => m_baseLocalScale;
 
     private Coroutine m_hoverRoutine;
+    private Coroutine m_moveRoutine;
 
     private CardModel m_model;
 
@@ -81,7 +81,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (m_hoverRoutine != null)
             StopCoroutine(m_hoverRoutine);
 
-        transform.localPosition = BaseLocalPosition;
+        transform.localPosition = m_baseLocalPosition;
         transform.localScale = m_baseLocalScale;
     }
 
@@ -111,13 +111,19 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!m_reactToMouseInput)
             return;
 
-        StartHoverTween(BaseLocalPosition, m_baseLocalScale);
+        StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!m_reactToMouseInput)
             return;
+
+        if (m_hoverRoutine != null)
+            StopCoroutine(m_hoverRoutine);
+
+        if (m_moveRoutine != null)
+            StopCoroutine(m_moveRoutine);
 
         OnCardClicked?.Invoke(this, this);
     }
@@ -174,5 +180,41 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         localTarget.y = Mathf.Min(localTarget.y, m_maxLocalY);
 
         return localTarget;
+    }
+
+    public void MoveCard(Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
+    {
+        m_baseLocalPosition = targetPos;
+        m_moveRoutine = StartCoroutine(MoveCardCoroutine(startPos, startRot, targetPos, targetRot, duration, delay));
+    }
+
+    private IEnumerator MoveCardCoroutine(Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
+    {
+        Transform cardTransform = transform;
+
+        if (delay > 0f)
+            yield return new WaitForSeconds(delay);
+
+        float time = 0f;
+
+        while (time < duration)
+        {
+            if (cardTransform == null)
+                yield break;
+
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / duration);
+
+            cardTransform.localPosition = Vector3.Lerp(startPos, targetPos, t);
+            cardTransform.localRotation = Quaternion.Slerp(startRot, targetRot, t);
+
+            yield return null;
+        }
+
+        if (cardTransform != null)
+        {
+            cardTransform.localPosition = targetPos;
+            cardTransform.localRotation = targetRot;
+        }
     }
 }
