@@ -20,6 +20,7 @@ public class BoardPresenter : MonoBehaviour
         m_hand = hand;
         m_mana = mana;
         model.OnCardAdded += HandleOnCardAdded;
+        model.OnCardRemoved += HandleOnCardRemoved;
 
         m_cardToPlaceholder = new Dictionary<CardPresenter, CardPresenter>();
     }
@@ -27,6 +28,7 @@ public class BoardPresenter : MonoBehaviour
     private void OnDisable()
     {
         m_model.OnCardAdded -= HandleOnCardAdded;
+        m_model.OnCardRemoved -= HandleOnCardRemoved;
     }
 
     private void HandleOnCardAdded(object sender, CardModel card)
@@ -46,18 +48,24 @@ public class BoardPresenter : MonoBehaviour
         presenter.OnCardClicked += HandleOnCardClicked;
     }
 
-    private void HandleOnCardClicked(object sender, CardPresenter presenter)
+    private void HandleOnCardRemoved(object sender, CardModel card)
     {
-        presenter.OnCardClicked -= HandleOnCardClicked;
-
-        m_mana.CurrentMana += presenter.Model.CurrentCost;
+        CardPresenterRegistry.TryGet(card, out CardPresenter presenter);
 
         CardPresenter placeholder = m_cardToPlaceholder[presenter];
         m_cardToPlaceholder.Remove(presenter);
         GameObject.Destroy(placeholder.gameObject);
 
         RealignCards();
+    }
 
+    private void HandleOnCardClicked(object sender, CardPresenter presenter)
+    {
+        presenter.OnCardClicked -= HandleOnCardClicked;
+
+        m_mana.CurrentMana += presenter.Model.CurrentCost;
+
+        m_model.Remove(presenter.Model);
         m_hand.Add(presenter.Model);
     }
 

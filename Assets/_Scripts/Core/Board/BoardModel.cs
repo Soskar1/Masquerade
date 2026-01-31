@@ -6,6 +6,7 @@ public class BoardModel
     private List<CardModel> m_selectedCards;
 
     public event EventHandler<CardModel> OnCardAdded;
+    public event EventHandler<CardModel> OnCardRemoved;
 
     public BoardModel()
     {
@@ -21,5 +22,11 @@ public class BoardModel
     public void Remove(CardModel card)
     {
         m_selectedCards.Remove(card);
+        OnCardRemoved?.Invoke(this, card);
+    }
+
+    public void Clear()
+    {
+
     }
 }
