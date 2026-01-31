@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
@@ -12,6 +13,9 @@ public class Bootstrap : MonoBehaviour
 
     [SerializeField] private BattlePresenter m_battlePresenter;
 
+    [SerializeField] private RewardUI m_rewardUI;
+    [SerializeField] private List<CardData> m_cardDatabase;
+
     public async void Awake()
     {
         EntityModel player = new EntityModel(m_playerData, true);
@@ -20,7 +24,7 @@ public class Bootstrap : MonoBehaviour
 
         m_playerPresenter.Initialize(player, battle);
         m_enemyPresenter.Initialize(enemy, battle);
-
+        m_rewardUI.Initialize(new CardDatabase(m_cardDatabase));
         m_battlePresenter.Initialize(battle);
         await battle.StartTurn();
     }

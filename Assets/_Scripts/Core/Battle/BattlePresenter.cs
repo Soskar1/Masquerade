@@ -10,6 +10,7 @@ public class BattlePresenter : MonoBehaviour
     [SerializeField] private BoardPresenter m_enemyBoardPresenter;
     [SerializeField] private CurrentScore m_playerScore;
     [SerializeField] private CurrentScore m_enemyScore;
+    [SerializeField] private RewardUI m_rewardUI;
 
     private Vector3 m_playerScoreInitialPosition;
     private Vector3 m_enemyScoreInitialPosition;
@@ -26,15 +27,26 @@ public class BattlePresenter : MonoBehaviour
     {
         m_battleModel = model;
         m_battleModel.OnTurnStarted += HandleOnTurnStarted;
+        m_battleModel.OnPlayerWon += HandleOnPlayerWon;
 
         m_battleModel.RevealBoardsAsync = RevealBoardsAsync;
         m_battleModel.CalculatePointsAsync = AnimateScoreCalcualtionAsync;
+        
 
         m_playerScoreInitialPosition = m_playerScore.transform.localPosition;
         m_enemyScoreInitialPosition = m_enemyScore.transform.localPosition;
     }
 
-    private void OnDisable() => m_battleModel.OnTurnStarted -= HandleOnTurnStarted;
+    private void HandleOnPlayerWon(object sender, System.EventArgs e)
+    {
+        m_rewardUI.gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        m_battleModel.OnTurnStarted -= HandleOnTurnStarted;
+        m_battleModel.OnPlayerWon -= HandleOnPlayerWon;
+    }
 
     private void HandleOnTurnStarted(object sender, System.EventArgs e) => m_endTurnButton.interactable = true;
 

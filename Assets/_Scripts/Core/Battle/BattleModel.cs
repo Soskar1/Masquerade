@@ -10,6 +10,7 @@ public class BattleModel
 
     public event EventHandler OnTurnStarted;
     public event EventHandler OnTurnEnded;
+    public event EventHandler OnPlayerWon;
 
     public Func<Task> RevealBoardsAsync { get; set; }
     public Func<Task> CalculatePointsAsync { get; set; }
@@ -90,8 +91,15 @@ public class BattleModel
 
         OnTurnEnded?.Invoke(this, EventArgs.Empty);
 
-        // 4) Start next turn (optional delay if you want)
-        await StartTurn();
+        if (m_enemy.Health.CurrentHealth <= 0)
+        {
+            OnPlayerWon?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            // 4) Start next turn (optional delay if you want)
+            await StartTurn();
+        }
     }
 
     private int CalculateScore(BoardModel board)
