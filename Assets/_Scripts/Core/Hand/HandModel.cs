@@ -8,6 +8,7 @@ public class HandModel
     private readonly DeckModel m_deck;
 
     public event EventHandler<List<CardModel>> OnHandChanged;
+    public event EventHandler<CardModel> OnCardRemoved;
 
     public HandModel(DeckModel deck, int maxSize)
     {
@@ -28,5 +29,11 @@ public class HandModel
 
         m_cards = cards;
         OnHandChanged?.Invoke(this, m_cards);
+    }
+
+    public void RemoveCard(CardModel card)
+    {
+        m_cards.Remove(card);
+        OnCardRemoved?.Invoke(this, card);
     }
 }

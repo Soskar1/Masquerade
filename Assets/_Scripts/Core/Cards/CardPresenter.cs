@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private Image m_maskImage;
     [SerializeField] private Image m_borderImage;
@@ -23,15 +24,16 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
 
-    private Vector3 m_baseLocalPosition;
+    public Vector3 BaseLocalPosition { get; set; }
     private Vector3 m_baseLocalScale;
-    private bool m_hasBaseTransform = false;
 
     private Coroutine m_hoverRoutine;
 
     private CardModel m_model;
 
     private bool m_reactToMouseInput;
+
+    public event EventHandler<CardPresenter> OnCardClicked;
 
     public bool ReactToMouseInput
     {
@@ -60,6 +62,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         m_cardCover.SetActive(displayCardCover);
 
+        m_baseLocalScale = transform.localScale;
+
         m_model.OnScoreChanged += HandleOnScoreChanged;
         m_model.OnCostChanged += HandleOnCostChanged;
     }
@@ -75,12 +79,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (m_hoverRoutine != null)
             StopCoroutine(m_hoverRoutine);
 
-        // Optional: reset transform when disabled
-        if (m_hasBaseTransform)
-        {
-            transform.localPosition = m_baseLocalPosition;
-            transform.localScale = m_baseLocalScale;
-        }
+        transform.localPosition = BaseLocalPosition;
+        transform.localScale = m_baseLocalScale;
     }
 
     private void HandleOnScoreChanged(object sender, int score)
@@ -98,14 +98,6 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!m_reactToMouseInput)
             return;
 
-        // Store the base transform on first hover
-        if (!m_hasBaseTransform)
-        {
-            m_baseLocalPosition = transform.localPosition;
-            m_baseLocalScale = transform.localScale;
-            m_hasBaseTransform = true;
-        }
-
         Vector3 targetScale = m_baseLocalScale * m_hoverScaleMultiplier;
         Vector3 targetPos = CalculateHoverPosition(m_hoverOffset);
 
@@ -117,10 +109,15 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!m_reactToMouseInput)
             return;
 
-        if (!m_hasBaseTransform)
+        StartHoverTween(BaseLocalPosition, m_baseLocalScale);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!m_reactToMouseInput)
             return;
 
-        StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
+        OnCardClicked?.Invoke(this, this);
     }
 
     private void StartHoverTween(Vector3 targetPos, Vector3 targetScale)
