@@ -225,6 +225,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3315017288829433842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1451223475764374148}
+  m_Layer: 5
+  m_Name: CostTextCreatePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1451223475764374148
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3315017288829433842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7602385792749574301}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -5.8, y: -203}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4258064687747778231
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +447,7 @@ RectTransform:
   - {fileID: 2414961043881616448}
   - {fileID: 3878124408651166624}
   - {fileID: 3400031293298809048}
+  - {fileID: 1451223475764374148}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -437,11 +473,12 @@ MonoBehaviour:
   m_cardCover: {fileID: 7700061560384540612}
   m_scoreImage: {fileID: 5319269569808195683}
   m_costImage: {fileID: 8125385667271843933}
+  m_scoreMessagePrefab: {fileID: 3547227028783104571, guid: d74a108ef097272449b0214fba2b29cd, type: 3}
   m_hoverScaleMultiplier: 1.2
   m_hoverOffset: 40
   m_hoverDuration: 0.15
   m_maxLocalY: 120
-  m_revealDuration: 3
+  m_revealDuration: 2
   m_animator: {fileID: 371002264762179209}
   m_backgroundSprites:
   - m_color: 0

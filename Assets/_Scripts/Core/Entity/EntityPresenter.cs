@@ -6,6 +6,7 @@ public class EntityPresenter : MonoBehaviour
     [SerializeField] private HealthPresenter m_healthPresenter;
     [SerializeField] private ManaPresenter m_manaPresenter;
     [SerializeField] private BoardPresenter m_boardPresenter;
+    [SerializeField] private CurrentScore m_score;
 
     public void Initialize(EntityModel entityModel, BattleModel battleModel)
     {

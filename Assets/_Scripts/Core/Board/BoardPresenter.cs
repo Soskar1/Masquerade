@@ -20,6 +20,9 @@ public class BoardPresenter : MonoBehaviour
     private ManaModel m_mana;
     private BattleModel m_battle;
 
+    public BoardModel BoardModel => m_board;
+    public List<CardPresenter> Cards => m_cardToPlaceholder.Keys.ToList();
+
     private bool m_canInteractWithCards = false;
 
     public void Initialize(EntityModel entity, BattleModel battle)

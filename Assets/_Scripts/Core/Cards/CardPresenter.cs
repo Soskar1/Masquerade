@@ -16,6 +16,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Image m_scoreImage;
     [SerializeField] private Image m_costImage;
 
+    [SerializeField] private ScoreMessage m_scoreMessagePrefab;
+
     [Header("Hover Settings")]
     [SerializeField] private float m_hoverScaleMultiplier = 1.2f;
     [SerializeField] private float m_hoverOffset = 40f;
@@ -277,5 +279,13 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         yield return new WaitForSeconds(m_revealDuration);
 
         tcs.SetResult(true);
+    }
+
+    public ScoreMessage SpawnScoreText()
+    {
+        ScoreMessage message = Instantiate(m_scoreMessagePrefab, transform.position, Quaternion.identity, transform.parent);
+        message.Initialize(Model.CurrentScore);
+
+        return message;
     }
 }

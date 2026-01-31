@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &218608909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6565408575698222371, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+  m_PrefabInstance: {fileID: 9215089582913789858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2157989a34c9b124aab2ff02ac7b0b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &325318481
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +401,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b27867fd538b7248b3cd8be1a4bfe97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &761339027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6565408575698222371, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+  m_PrefabInstance: {fileID: 1804066282}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2157989a34c9b124aab2ff02ac7b0b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &882509920 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6753878490525507510, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
@@ -538,7 +560,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_endTurnButton: {fileID: 1686750141}
+  m_playerBoardPresenter: {fileID: 1998477090}
   m_enemyBoardPresenter: {fileID: 882509920}
+  m_playerScore: {fileID: 218608909}
+  m_enemyScore: {fileID: 761339027}
 --- !u!1 &1394070467
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +899,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1139921057196491609, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139921057196491609, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -89.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3136509237490241797, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_LocalScale.y
       value: -1
@@ -885,6 +918,10 @@ PrefabInstance:
     - target: {fileID: 3136509237490241797, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120619845540110665, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4206607975088293083, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_text
@@ -985,6 +1022,10 @@ PrefabInstance:
     - target: {fileID: 5593531923090220604, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934718527160740133, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7440329073369344998, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_Name
@@ -1306,6 +1347,17 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1998477090 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6753878490525507510, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+  m_PrefabInstance: {fileID: 9215089582913789858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600d6442a7573174ca3bc547c58fb525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9215089582913789858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1393,6 +1445,10 @@ PrefabInstance:
     - target: {fileID: 5593531923090220604, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934718527160740133, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7440329073369344998, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_Name

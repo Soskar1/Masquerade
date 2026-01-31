@@ -12,6 +12,7 @@ public class BattleModel
     public event EventHandler OnTurnEnded;
 
     public Func<Task> RevealBoardsAsync { get; set; }
+    public Func<Task> CalculatePointsAsync { get; set; }
 
     public BattleModel(EntityModel player, EntityModel enemy)
     {
@@ -74,6 +75,8 @@ public class BattleModel
         // 2) Calculate score
         int playerScore = CalculateScore(m_player.Board);
         int enemyScore = CalculateScore(m_enemy.Board);
+
+        await CalculatePointsAsync?.Invoke();
 
         // 3) Deal damage
         int diff = Mathf.Abs(playerScore - enemyScore);
