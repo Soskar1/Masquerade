@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class BattlePresenter : MonoBehaviour
 {
     [SerializeField] private Button m_endTurnButton;
+    [SerializeField] private BoardPresenter m_enemyBoard;
 
     private BattleModel m_battleModel;
 
@@ -20,6 +21,8 @@ public class BattlePresenter : MonoBehaviour
     public void EndTurn()
     {
         m_endTurnButton.interactable = false;
+        m_enemyBoard.Reveal();
+
         m_battleModel.EndTurn();
     }
 }

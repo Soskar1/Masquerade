@@ -385,6 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7602385792749574301}
   - component: {fileID: 83793265748994019}
+  - component: {fileID: 371002264762179209}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -440,6 +441,7 @@ MonoBehaviour:
   m_hoverOffset: 40
   m_hoverDuration: 0.15
   m_maxLocalY: 120
+  m_animator: {fileID: 371002264762179209}
   m_backgroundSprites:
   - m_color: 0
     m_sprite: {fileID: 21300000, guid: 30cddc99c09a7d24d85017b547ff4685, type: 3}
@@ -465,6 +467,28 @@ MonoBehaviour:
     m_sprite: {fileID: 21300000, guid: b8181b751328c93418b4251ad8a855f1, type: 3}
   - m_cost: 3
     m_sprite: {fileID: 21300000, guid: 2a4e44cd2d3db5449b52cca92be0fb00, type: 3}
+--- !u!95 &371002264762179209
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793415923356160217}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d7dc7df7ee7772943977c9fae7685617, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7680541365795780545
 GameObject:
   m_ObjectHideFlags: 0

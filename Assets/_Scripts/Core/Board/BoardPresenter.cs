@@ -81,4 +81,10 @@ public class BoardPresenter : MonoBehaviour
             actualCard.MoveCard(actualCard.transform.localPosition, actualCard.transform.rotation, placeholder.transform.localPosition, placeholder.transform.rotation, m_cardMovementDuration, 0);
         }
     }
+
+    public void Reveal()
+    {
+        foreach (CardPresenter card in m_cardToPlaceholder.Keys)
+            card.Reveal();
+    }
 }

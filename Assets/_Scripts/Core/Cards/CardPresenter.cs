@@ -21,6 +21,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private float m_hoverDuration = 0.15f;
     [SerializeField] private float m_maxLocalY = 120f;
 
+    [SerializeField] private Animator m_animator;
+
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
 
@@ -239,5 +241,17 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             cardTransform.localPosition = targetPos;
             cardTransform.localRotation = targetRot;
         }
+    }
+
+    public void Reveal()
+    {
+        m_cardCover.SetActive(false);
+        m_maskImage.enabled = true;
+        m_backgroundImage.enabled = true;
+        m_scoreImage.enabled = true;
+        m_costImage.enabled = true;
+
+        m_animator.enabled = true;
+        m_animator.SetTrigger("Reveal");
     }
 }
