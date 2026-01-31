@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e0599c948ccaa43980b63ba6f0b10b, type: 3}
   m_Name: SmileGreen
   m_EditorClassIdentifier: 
-  m_maskSprite: {fileID: -2413806693520163455, guid: 7c793c414dc382049bcb89bf906c1709, type: 3}
+  m_maskSprite: {fileID: 21300000, guid: 7ba3f34a876714340a30f2eafaaf3f8d, type: 3}
+  m_borderSprite: {fileID: 21300000, guid: 673476d4105af83438b692920f20f324, type: 3}
+  m_backgroundSprite: {fileID: 21300000, guid: 5b9605a6b9aec684fb49850e46a72b1c, type: 3}
   m_score: 1
   m_cost: 1
