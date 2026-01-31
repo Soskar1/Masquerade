@@ -153,6 +153,11 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
     }
 
+    public void HoverToInitialPosition()
+    {
+        StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!m_reactToMouseInput)

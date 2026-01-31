@@ -593,7 +593,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 551247016}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 99322975}
+        m_TargetAssemblyTypeName: RewardUI, Assembly-CSharp
+        m_MethodName: Get
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &551247016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,7 +1254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerData: {fileID: 11400000, guid: d5ab4a1108977974389d55eee8e8e53e, type: 2}
   m_playerPresenter: {fileID: 590847952}
-  m_enemyData: {fileID: 11400000, guid: 54f03725fead98e4a94e55a77ceff3b2, type: 2}
+  m_enemies:
+  - {fileID: 11400000, guid: 54f03725fead98e4a94e55a77ceff3b2, type: 2}
   m_enemyPresenter: {fileID: 1804066284}
   m_battlePresenter: {fileID: 1351097247}
   m_rewardUI: {fileID: 99322975}

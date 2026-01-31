@@ -16,4 +16,6 @@ public class DeckModel
 
         return new CardModel(cardData, color);
     }
+
+    public void Add(CardData cardData) => m_cards.Add(cardData);
 }

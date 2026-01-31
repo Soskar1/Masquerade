@@ -31,7 +31,7 @@ public class BattlePresenter : MonoBehaviour
 
         m_battleModel.RevealBoardsAsync = RevealBoardsAsync;
         m_battleModel.CalculatePointsAsync = AnimateScoreCalcualtionAsync;
-        
+        m_battleModel.WaitForReward = WaitForReward;
 
         m_playerScoreInitialPosition = m_playerScore.transform.localPosition;
         m_enemyScoreInitialPosition = m_enemyScore.transform.localPosition;
@@ -127,4 +127,6 @@ public class BattlePresenter : MonoBehaviour
         bigger.Speed = 1000;
         await bigger.GetTask();
     }
+
+    private async Task WaitForReward() => await m_rewardUI.GetTask();
 }

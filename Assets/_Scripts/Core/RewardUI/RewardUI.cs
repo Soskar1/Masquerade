@@ -17,9 +17,24 @@ public class RewardUI : MonoBehaviour
 
     private CardDatabase m_cardDatabase;
 
-    public void Initialize(CardDatabase database)
+    private EntityModel m_player;
+    private CardData m_selectedCard;
+
+    private List<CardPresenter> m_cards;
+
+    TaskCompletionSource<bool> m_rewardPicked;
+
+    public Task GetTask()
+    {
+        m_rewardPicked = new TaskCompletionSource<bool>();
+        return m_rewardPicked.Task;
+    }
+
+    public void Initialize(CardDatabase database, EntityModel player)
     {
         m_cardDatabase = database;
+        m_player = player;
+        m_cards = new List<CardPresenter>();
     }
 
     public async Task DisplayCards()
@@ -43,11 +58,52 @@ public class RewardUI : MonoBehaviour
             instance.BaseLocalScale = instance.transform.localScale;
             initialDelay += 0.15f;
             time -= 0.05f;
+
+            instance.OnCardClicked += HandleOnCardClicked;
+            m_cards.Add(instance);
         }
 
         await lastCardTask;
 
         m_getButton.gameObject.SetActive(true);
+        m_getButton.interactable = false;
         m_headerText.gameObject.SetActive(true);
+    }
+
+    private void HandleOnCardClicked(object sender, CardPresenter card)
+    {
+        foreach (var presenter in m_cards)
+        {
+            if (presenter == card)
+                continue;
+
+            presenter.IsHoverAnimationEnabled = true;
+
+            presenter.HoverToInitialPosition();
+        }
+
+        m_selectedCard = card.Model.CardData;
+
+        m_getButton.interactable = true;
+        card.IsHoverAnimationEnabled = false;
+    }
+
+    public void Get()
+    {
+        m_player.Deck.Add(m_selectedCard);
+
+        foreach (var presenter in m_cards)
+        {
+            presenter.OnCardClicked -= HandleOnCardClicked;
+            GameObject.Destroy(presenter.gameObject);
+        }
+
+        m_cards.Clear();
+
+        m_selectedCard = null;
+        gameObject.SetActive(false);
+
+        if (m_rewardPicked != null)
+            m_rewardPicked.SetResult(true);
     }
 }

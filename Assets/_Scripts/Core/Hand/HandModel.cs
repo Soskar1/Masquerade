@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class HandModel
 {
@@ -8,7 +9,7 @@ public class HandModel
     private readonly DeckModel m_deck;
 
     public event EventHandler<CardModel> OnCardAdded;
-    public event EventHandler<CardModel> OnCardRemoved;
+    public event EventHandler<OnCardRemovedEventArgs> OnCardRemoved;
 
     public List<CardModel> Cards => m_cards;
 
@@ -34,9 +35,20 @@ public class HandModel
         }
     }
 
-    public void RemoveCard(CardModel card)
+    public void RemoveCard(CardModel card, bool deleteFromTheGame = false)
     {
         m_cards.Remove(card);
-        OnCardRemoved?.Invoke(this, card);
+        OnCardRemovedEventArgs args = new OnCardRemovedEventArgs(card, deleteFromTheGame);
+        OnCardRemoved?.Invoke(this, args);
+    }
+
+    public void Clear()
+    {
+        int size = m_cards.Count;
+        for (int i = 0; i < size; ++i)
+        {
+            CardModel model = m_cards.First();
+            RemoveCard(model, true);
+        }
     }
 }

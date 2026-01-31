@@ -55,6 +55,11 @@ public class BoardPresenter : MonoBehaviour
 
     private void OnDisable()
     {
+        Disable();
+    }
+
+    public void Disable()
+    {
         m_board.OnCardAdded -= HandleOnCardAdded;
         m_board.OnCardRemoved -= HandleOnCardRemoved;
         m_battle.OnTurnStarted -= HandleOnTurnStarted;

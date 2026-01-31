@@ -16,6 +16,11 @@ public class ManaPresenter : MonoBehaviour
 
     private void OnDisable()
     {
+        Disable();
+    }
+
+    public void Disable()
+    {
         m_manaModel.OnManaChanged -= HandleOnManaChanged;
     }
 

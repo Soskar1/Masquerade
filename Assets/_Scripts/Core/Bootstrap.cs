@@ -8,7 +8,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private EntityPresenter m_playerPresenter;
 
     [Header("Enemy")]
-    [SerializeField] private EntityData m_enemyData;
+    [SerializeField] private List<EntityData> m_enemies;
     [SerializeField] private EntityPresenter m_enemyPresenter;
 
     [SerializeField] private BattlePresenter m_battlePresenter;
@@ -19,13 +19,12 @@ public class Bootstrap : MonoBehaviour
     public async void Awake()
     {
         EntityModel player = new EntityModel(m_playerData, true);
-        EntityModel enemy = new EntityModel(m_enemyData, false);
-        BattleModel battle = new BattleModel(player, enemy);
+        BattleModel battle = new BattleModel(player, m_enemies);
 
         m_playerPresenter.Initialize(player, battle);
-        m_enemyPresenter.Initialize(enemy, battle);
-        m_rewardUI.Initialize(new CardDatabase(m_cardDatabase));
+        m_enemyPresenter.Initialize(battle);
+        m_rewardUI.Initialize(new CardDatabase(m_cardDatabase), player);
         m_battlePresenter.Initialize(battle);
-        await battle.StartTurn();
+        await battle.StartNewBattle();
     }
 }
