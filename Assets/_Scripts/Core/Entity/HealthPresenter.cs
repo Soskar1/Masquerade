@@ -8,7 +8,7 @@ public class HealthPresenter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_text;
     private HealthModel m_healthModel;
 
-    public void Register(HealthModel model)
+    public void Initialize(HealthModel model)
     {
         if (m_healthModel != null)
             Unregister();
