@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b8181b751328c93418b4251ad8a855f1
+guid: 16049f64601a3b0468e677fc69576c15
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1429922672808201931
-    second: MasqueradeCards_0000s_0001_Price2_0
+      213: -7662867401306765195
+    second: MasqueradeCards_0000s_0004_Price5_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MasqueradeCards_0000s_0001_Price2_0
+      name: MasqueradeCards_0000s_0004_Price5_0
       rect:
         serializedVersion: 2
         x: 10
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5317df6b7e4e72ce0800000000000000
-      internalID: -1429922672808201931
+      spriteID: 5788038b2b608a590800000000000000
+      internalID: -7662867401306765195
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MasqueradeCards_0000s_0001_Price2_0: -1429922672808201931
+      MasqueradeCards_0000s_0004_Price5_0: -7662867401306765195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

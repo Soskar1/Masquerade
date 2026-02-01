@@ -80,8 +80,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_maskImage.sprite = model.CardData.MaskSprite;
         m_borderImage.sprite = model.CardData.BorderSprite;
         m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
-        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore)model.CurrentScore].Sprite;
-        m_costImage.sprite = m_costSpritesDict[(CardCost)model.CurrentCost].Sprite;
+        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore) model.CurrentScore].Sprite;
+        m_costImage.sprite = m_costSpritesDict[(CardCost) model.CurrentCost].Sprite;
 
         m_cardCover.SetActive(displayCardCover);
         m_maskImage.enabled = !displayCardCover;
