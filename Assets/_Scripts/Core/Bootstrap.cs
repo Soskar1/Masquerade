@@ -41,6 +41,8 @@ public class Bootstrap : MonoBehaviour
     public void OnDisable()
     {
         m_controls.Player.Escape.performed -= Escape_performed;
+        m_controls.Disable();
+        m_controls.Dispose();
     }
 
     private void Escape_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

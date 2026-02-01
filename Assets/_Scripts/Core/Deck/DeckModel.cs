@@ -28,7 +28,7 @@ public class DeckModel
 
     public void Add(CardData cardData) => m_cards.Add(cardData);
 
-    private static List<ModifierModel> GenerateRandomModifiers(
+    public static List<ModifierModel> GenerateRandomModifiers(
     bool allowNone,
     int maxModifiers,
     bool allowSameColorAsCard,

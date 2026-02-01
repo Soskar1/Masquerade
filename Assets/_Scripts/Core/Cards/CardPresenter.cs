@@ -39,6 +39,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
 
+    public List<ModifierPresenter> modifiers;
+
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
     public Vector3 BaseLocalScale
@@ -97,14 +99,32 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         m_baseLocalScale = transform.localScale;
 
+        modifiers = new List<ModifierPresenter>();
         foreach (var modifer in model.Modifiers)
         {
             ModifierPresenter modifierPresenter = Instantiate(m_modiferPrefab, m_modifierParent);
             modifierPresenter.Initialize(modifer);
+            modifiers.Add(modifierPresenter);
         }
 
         m_model.OnScoreChanged += HandleOnScoreChanged;
         m_model.OnCostChanged += HandleOnCostChanged;
+    }
+
+    public void Disable()
+    {
+        if (modifiers != null)
+        {
+            foreach (var modifier in modifiers)
+            {
+                GameObject.Destroy(modifier.gameObject);
+            }
+
+            modifiers.Clear();
+        }
+        
+        //m_model.OnScoreChanged -= HandleOnScoreChanged;
+        //m_model.OnCostChanged -= HandleOnCostChanged;
     }
 
     private void OnDisable()
