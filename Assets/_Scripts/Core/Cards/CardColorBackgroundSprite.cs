@@ -4,8 +4,8 @@
 public struct CardColorBackgroundSprite
 {
     [SerializeField] private CardColor m_color;
-    [SerializeField] private Sprite m_sprite;
+    [SerializeField] private Texture m_texture;
 
     public CardColor Color => m_color;
-    public Sprite Sprite => m_sprite;
+    public Texture Texture => m_texture;
 }

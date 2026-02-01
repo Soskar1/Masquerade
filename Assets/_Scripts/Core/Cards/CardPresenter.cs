@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,11 +11,16 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [SerializeField] private Image m_maskImage;
     [SerializeField] private Image m_borderImage;
-    [SerializeField] private Image m_backgroundImage;
+    [SerializeField] private RawImage m_backgroundImage;
     [SerializeField] private GameObject m_cardCover;
 
-    [SerializeField] private Image m_scoreImage;
-    [SerializeField] private Image m_costImage;
+    [SerializeField] private TextMeshProUGUI m_scoreText;
+    [SerializeField] private TextMeshProUGUI m_costText;
+
+    [SerializeField] private ScoreMessage m_scoreMessagePrefab;
+
+    [SerializeField] private Transform m_modifierParent;
+    [SerializeField] private ModifierPresenter m_modiferPrefab;
 
     [Header("Hover Settings")]
     [SerializeField] private float m_hoverScaleMultiplier = 1.2f;
@@ -21,20 +28,20 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private float m_hoverDuration = 0.15f;
     [SerializeField] private float m_maxLocalY = 120f;
 
+    [SerializeField] private float m_revealDuration = 4f;
+
     [SerializeField] private Animator m_animator;
 
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
 
-    [SerializeField] private List<CardScoreSprite> m_scoreSprites;
-    private Dictionary<CardScore, CardScoreSprite> m_scoreSpritesDict;
-
-    [SerializeField] private List<CardCostSprite> m_costSprites;
-    private Dictionary<CardCost, CardCostSprite> m_costSpritesDict;
-
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
-    public Vector3 BaseLocalScale => m_baseLocalScale;
+    public Vector3 BaseLocalScale
+    {
+        get => m_baseLocalScale;
+        set => m_baseLocalScale = value;
+    }
 
     private Coroutine m_hoverRoutine;
     private Coroutine m_moveRoutine;
@@ -53,22 +60,16 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public event EventHandler<CardPresenter> OnCardClicked;
 
+    private TaskCompletionSource<bool> m_cardMoved;
+    private TaskCompletionSource<bool> m_cardBuffed;
+    // private ModifierModel m_modi
+
     private void Awake()
     {
         m_backgroundSpritesDict = new Dictionary<CardColor, CardColorBackgroundSprite>();
 
         foreach (CardColorBackgroundSprite bgSprite in m_backgroundSprites)
             m_backgroundSpritesDict.Add(bgSprite.Color, bgSprite);
-
-        m_scoreSpritesDict = new Dictionary<CardScore, CardScoreSprite>();
-
-        foreach (CardScoreSprite bgSprite in m_scoreSprites)
-            m_scoreSpritesDict.Add(bgSprite.Score, bgSprite);
-
-        m_costSpritesDict = new Dictionary<CardCost, CardCostSprite>();
-
-        foreach (CardCostSprite bgSprite in m_costSprites)
-            m_costSpritesDict.Add(bgSprite.Cost, bgSprite);
     }
 
     public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
@@ -79,17 +80,24 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         
         m_maskImage.sprite = model.CardData.MaskSprite;
         m_borderImage.sprite = model.CardData.BorderSprite;
-        m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
-        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore) model.CurrentScore].Sprite;
-        m_costImage.sprite = m_costSpritesDict[(CardCost) model.CurrentCost].Sprite;
+        m_backgroundImage.texture = m_backgroundSpritesDict[model.CardColor].Texture;
+        UpdateScore(model.CurrentScore);
+        m_costText.text = model.CurrentCost.ToString();
+        m_scoreText.color = model.CardColor.GetColorCode();
 
         m_cardCover.SetActive(displayCardCover);
         m_maskImage.enabled = !displayCardCover;
         m_backgroundImage.enabled = !displayCardCover;
-        m_scoreImage.enabled = !displayCardCover;
-        m_costImage.enabled = !displayCardCover;
+        m_scoreText.transform.parent.gameObject.SetActive(!displayCardCover);
+        m_costText.transform.parent.gameObject.SetActive(!displayCardCover);
 
         m_baseLocalScale = transform.localScale;
+
+        foreach (var modifer in model.Modifiers)
+        {
+            ModifierPresenter modifierPresenter = Instantiate(m_modiferPrefab, m_modifierParent);
+            modifierPresenter.Initialize(modifer);
+        }
 
         m_model.OnScoreChanged += HandleOnScoreChanged;
         m_model.OnCostChanged += HandleOnCostChanged;
@@ -112,18 +120,23 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void HandleOnScoreChanged(object sender, int score)
     {
-        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore)score].Sprite;
+        UpdateScore(score);
     }
+
+    private void UpdateScore(int score) => m_scoreText.text = "+" + score.ToString();
 
     private void HandleOnCostChanged(object sender, int cost)
     {
-        m_costImage.sprite = m_costSpritesDict[(CardCost)cost].Sprite;
+        m_costText.text = cost.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!IsHoverAnimationEnabled)
             return;
+
+        //if (m_baseLocalScale == null)
+        //    m_baseLocalScale = transform.localScale;
 
         Vector3 targetScale = m_baseLocalScale * m_hoverScaleMultiplier;
         Vector3 targetPos = CalculateHoverPosition(m_hoverOffset);
@@ -136,6 +149,11 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (!IsHoverAnimationEnabled)
             return;
 
+        StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
+    }
+
+    public void HoverToInitialPosition()
+    {
         StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
     }
 
@@ -213,6 +231,15 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_moveRoutine = StartCoroutine(MoveCardCoroutine(startPos, startRot, targetPos, targetRot, duration, delay));
     }
 
+    public async Task MoveCardAsync(Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
+    {
+        m_cardMoved = new TaskCompletionSource<bool>();
+        m_baseLocalPosition = targetPos;
+        m_moveRoutine = StartCoroutine(MoveCardCoroutine(startPos, startRot, targetPos, targetRot, duration, delay));
+
+        await m_cardMoved.Task;
+    }
+
     private IEnumerator MoveCardCoroutine(Vector3 startPos, Quaternion startRot, Vector3 targetPos, Quaternion targetRot, float duration, float delay)
     {
         Transform cardTransform = transform;
@@ -241,17 +268,55 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             cardTransform.localPosition = targetPos;
             cardTransform.localRotation = targetRot;
         }
+
+        if (m_cardMoved != null)
+            m_cardMoved.SetResult(true);
     }
 
-    public void Reveal()
+    public Task RevealAsync()
+    {
+        var tcs = new TaskCompletionSource<bool>();
+        StartCoroutine(RevealRoutine(tcs));
+        return tcs.Task;
+    }
+
+    private IEnumerator RevealRoutine(TaskCompletionSource<bool> tcs)
     {
         m_cardCover.SetActive(false);
         m_maskImage.enabled = true;
         m_backgroundImage.enabled = true;
-        m_scoreImage.enabled = true;
-        m_costImage.enabled = true;
+        m_scoreText.transform.parent.gameObject.SetActive(true);
+        m_scoreText.transform.parent.gameObject.SetActive(true);
+
 
         m_animator.enabled = true;
         m_animator.SetTrigger("Reveal");
+        
+        yield return new WaitForSeconds(m_revealDuration);
+
+        tcs.SetResult(true);
+    }
+
+    public ScoreMessage SpawnScoreText()
+    {
+        ScoreMessage message = Instantiate(m_scoreMessagePrefab, transform.position, Quaternion.identity, transform.parent);
+        message.Initialize(Model.CurrentScore);
+
+        return message;
+    }
+
+    public async Task StartBuffAnimation(ModifierModel modifier)
+    {
+        m_cardBuffed = new TaskCompletionSource<bool>();
+
+        m_animator.enabled = true;
+        m_animator.SetTrigger("Buff");
+
+        await m_cardBuffed.Task;
+    }
+
+    public void BuffCard()
+    {
+        
     }
 }
