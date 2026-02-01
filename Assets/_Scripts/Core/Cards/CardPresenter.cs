@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -13,8 +15,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Image m_backgroundImage;
     [SerializeField] private GameObject m_cardCover;
 
-    [SerializeField] private Image m_scoreImage;
-    [SerializeField] private Image m_costImage;
+    [SerializeField] private TextMeshProUGUI m_scoreText;
+    [SerializeField] private TextMeshProUGUI m_costText;
 
     [SerializeField] private ScoreMessage m_scoreMessagePrefab;
 
@@ -30,12 +32,6 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
     private Dictionary<CardColor, CardColorBackgroundSprite> m_backgroundSpritesDict;
-
-    [SerializeField] private List<CardScoreSprite> m_scoreSprites;
-    private Dictionary<CardScore, CardScoreSprite> m_scoreSpritesDict;
-
-    [SerializeField] private List<CardCostSprite> m_costSprites;
-    private Dictionary<CardCost, CardCostSprite> m_costSpritesDict;
 
     private Vector3 m_baseLocalPosition;
     private Vector3 m_baseLocalScale;
@@ -70,16 +66,6 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         foreach (CardColorBackgroundSprite bgSprite in m_backgroundSprites)
             m_backgroundSpritesDict.Add(bgSprite.Color, bgSprite);
-
-        m_scoreSpritesDict = new Dictionary<CardScore, CardScoreSprite>();
-
-        foreach (CardScoreSprite bgSprite in m_scoreSprites)
-            m_scoreSpritesDict.Add(bgSprite.Score, bgSprite);
-
-        m_costSpritesDict = new Dictionary<CardCost, CardCostSprite>();
-
-        foreach (CardCostSprite bgSprite in m_costSprites)
-            m_costSpritesDict.Add(bgSprite.Cost, bgSprite);
     }
 
     public void Initialize(CardModel model, bool displayCardCover = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
@@ -91,14 +77,14 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_maskImage.sprite = model.CardData.MaskSprite;
         m_borderImage.sprite = model.CardData.BorderSprite;
         m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
-        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore)model.CurrentScore].Sprite;
-        m_costImage.sprite = m_costSpritesDict[(CardCost)model.CurrentCost].Sprite;
+        UpdateScore(model.CurrentScore);
+        m_costText.text = model.CurrentCost.ToString();
 
         m_cardCover.SetActive(displayCardCover);
         m_maskImage.enabled = !displayCardCover;
         m_backgroundImage.enabled = !displayCardCover;
-        m_scoreImage.enabled = !displayCardCover;
-        m_costImage.enabled = !displayCardCover;
+        m_scoreText.transform.parent.gameObject.SetActive(!displayCardCover);
+        m_costText.transform.parent.gameObject.SetActive(!displayCardCover);
 
         m_baseLocalScale = transform.localScale;
 
@@ -123,12 +109,14 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void HandleOnScoreChanged(object sender, int score)
     {
-        m_scoreImage.sprite = m_scoreSpritesDict[(CardScore)score].Sprite;
+        UpdateScore(score);
     }
+
+    private void UpdateScore(int score) => m_scoreText.text = "+" + score.ToString();
 
     private void HandleOnCostChanged(object sender, int cost)
     {
-        m_costImage.sprite = m_costSpritesDict[(CardCost)cost].Sprite;
+        m_costText.text = cost.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -286,8 +274,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_cardCover.SetActive(false);
         m_maskImage.enabled = true;
         m_backgroundImage.enabled = true;
-        m_scoreImage.enabled = true;
-        m_costImage.enabled = true;
+        m_scoreText.transform.parent.gameObject.SetActive(true);
+        m_scoreText.transform.parent.gameObject.SetActive(true);
+
 
         m_animator.enabled = true;
         m_animator.SetTrigger("Reveal");
