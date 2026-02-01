@@ -11,7 +11,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [SerializeField] private Image m_maskImage;
     [SerializeField] private Image m_borderImage;
-    [SerializeField] private Image m_backgroundImage;
+    [SerializeField] private RawImage m_backgroundImage;
     [SerializeField] private GameObject m_cardCover;
 
     [SerializeField] private TextMeshProUGUI m_scoreText;
@@ -84,7 +84,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         
         m_maskImage.sprite = model.CardData.MaskSprite;
         m_borderImage.sprite = model.CardData.BorderSprite;
-        m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
+        m_backgroundImage.texture = m_backgroundSpritesDict[model.CardColor].Texture;
         UpdateScore(model.CurrentScore);
         m_costText.text = model.CurrentCost.ToString();
         m_scoreText.color = model.CardColor.GetColorCode();
@@ -138,6 +138,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (!IsHoverAnimationEnabled)
             return;
+
+        //if (m_baseLocalScale == null)
+        //    m_baseLocalScale = transform.localScale;
 
         Vector3 targetScale = m_baseLocalScale * m_hoverScaleMultiplier;
         Vector3 targetPos = CalculateHoverPosition(m_hoverOffset);
