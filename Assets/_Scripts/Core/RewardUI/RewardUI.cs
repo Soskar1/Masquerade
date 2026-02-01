@@ -51,7 +51,7 @@ public class RewardUI : MonoBehaviour
 
             CardPresenter instance = Instantiate(m_cardPresenterPrefab, m_cardSpawnpoint.position, Quaternion.identity, transform);
             CardData data = m_cardDatabase.GetRandomCard();
-            CardModel model = new CardModel(data, CardColor.Green);
+            CardModel model = new CardModel(data, CardColor.Green, new List<ModifierModel>());
             instance.Initialize(model, false, true, true);
             lastCardTask = instance.MoveCardAsync(instance.transform.localPosition, Quaternion.identity, placeholder.localPosition, Quaternion.identity, time, initialDelay);
             instance.transform.localScale *= 2;
