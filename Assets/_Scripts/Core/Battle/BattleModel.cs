@@ -91,7 +91,7 @@ public class BattleModel
         if (RevealBoardsAsync != null)
             await RevealBoardsAsync();
 
-        // await BuffCards?.Invoke();
+        await BuffCards?.Invoke();
 
         int playerScore = CalculateScore(m_player.Board);
         int enemyScore = CalculateScore(m_currentEnemy.Board);

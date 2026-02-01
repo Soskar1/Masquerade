@@ -38,7 +38,7 @@ public class DeckModel
         if (allowNone)
         {
             // 50% chance to have no modifiers (tweak this probability as you like)
-            if (UnityEngine.Random.value < 0.5f)
+            if (UnityEngine.Random.value < 0.65f)
                 return new List<ModifierModel>();
         }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -28,7 +29,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private float m_hoverDuration = 0.15f;
     [SerializeField] private float m_maxLocalY = 120f;
 
-    [SerializeField] private float m_revealDuration = 4f;
+    [SerializeField] private float m_revealDuration = 2f;
 
     [SerializeField] private Animator m_animator;
 
@@ -62,7 +63,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private TaskCompletionSource<bool> m_cardMoved;
     private TaskCompletionSource<bool> m_cardBuffed;
-    // private ModifierModel m_modi
+    private ModifierModel m_currentModificiator;
 
     private void Awake()
     {
@@ -134,9 +135,6 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (!IsHoverAnimationEnabled)
             return;
-
-        //if (m_baseLocalScale == null)
-        //    m_baseLocalScale = transform.localScale;
 
         Vector3 targetScale = m_baseLocalScale * m_hoverScaleMultiplier;
         Vector3 targetPos = CalculateHoverPosition(m_hoverOffset);
@@ -307,6 +305,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public async Task StartBuffAnimation(ModifierModel modifier)
     {
+        m_currentModificiator = modifier;
         m_cardBuffed = new TaskCompletionSource<bool>();
 
         m_animator.enabled = true;
@@ -317,6 +316,14 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void BuffCard()
     {
-        
+        m_animator.ResetTrigger("Buff");
+        Model.CurrentScore = (int)(Model.CurrentScore * (1 + (float)m_currentModificiator.Percentage / 100));
+        m_currentModificiator = null;
+    }
+
+    public void BuffAnimationEnd()
+    {
+        m_cardBuffed.SetResult(true);
+        m_animator.enabled = false;
     }
 }
