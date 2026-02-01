@@ -578,6 +578,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571386955}
     m_Modifications:
+    - target: {fileID: 83793265748994019, guid: 02d98e01a235cdc48a8a47a8b3ffaf59, type: 3}
+      propertyPath: isMenuCard
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 371002264762179209, guid: 02d98e01a235cdc48a8a47a8b3ffaf59, type: 3}
       propertyPath: m_Enabled
       value: 1

@@ -27,6 +27,6 @@ public class MenuCard : MonoBehaviour
         CardModel model = new CardModel(data, color, modifiers);
 
         
-        presenter.Initialize(model);
+        presenter.Initialize(model, false, false, false);
     }
 }

@@ -70,6 +70,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private TaskCompletionSource<bool> m_cardBuffed;
     private ModifierModel m_currentModificiator;
 
+
+    public bool isMenuCard = false;
+
     private void Awake()
     {
         m_backgroundSpritesDict = new Dictionary<CardColor, CardColorBackgroundSprite>();
@@ -156,6 +159,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (isMenuCard)
+            return;
+
         if (!IsHoverAnimationEnabled)
             return;
 
@@ -170,6 +176,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (isMenuCard)
+            return;
+
         if (!IsHoverAnimationEnabled)
             return;
 
@@ -178,6 +187,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void HoverToInitialPosition()
     {
+        if (isMenuCard)
+            return;
+
         StartHoverTween(m_baseLocalPosition, m_baseLocalScale);
     }
 

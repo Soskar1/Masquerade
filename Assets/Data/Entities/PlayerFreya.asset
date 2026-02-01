@@ -17,7 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cef23dda01dd47a47832a86be5f61368, type: 2}
   - {fileID: 11400000, guid: 7e23dc2df6232e14a92250f639f6826e, type: 2}
   - {fileID: 11400000, guid: ebad17e5bff048b428411d79af11152b, type: 2}
-  m_health: 100
+  m_health: 150
   m_maxMana: 10
   m_handSize: 3
   m_portrait: {fileID: 21300000, guid: f2b52a4cf71525442bf17f27f8f74175, type: 3}
