@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Spin : MonoBehaviour
 {
-    float speed;
+    [SerializeField] private float m_speed = 15.0f;
 
     void Start()
     {
-        speed = 15.0f;
+
     }
 
     void Update()
     {
-        transform.Rotate(0, 0, 1 * speed * Time.deltaTime);
+        transform.Rotate(0, 0, 1 * m_speed * Time.deltaTime);
     }
 }
