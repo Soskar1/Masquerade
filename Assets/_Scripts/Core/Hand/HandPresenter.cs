@@ -27,6 +27,9 @@ public class HandPresenter : MonoBehaviour
     private bool m_reactToMouseInput;
     private bool m_isHoverAnimationEnabled;
 
+    [SerializeField] private AudioSource m_audio;
+    [SerializeField] private AudioClip m_drawCard;
+
     private bool m_canPlayCards = false;
 
     public void Initialize(HandModel model, BoardModel boardModel, ManaModel manaModel, BattleModel battleModel, bool hideCards = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
@@ -105,6 +108,8 @@ public class HandPresenter : MonoBehaviour
 
         m_cardsInHand.Add(presenter);
         presenter.OnCardClicked += HandleOnCardClicked;
+
+        m_audio.PlayOneShot(m_drawCard);
 
         AnimateRelayout();
     }
