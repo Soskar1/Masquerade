@@ -61,6 +61,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public event EventHandler<CardPresenter> OnCardClicked;
 
     private TaskCompletionSource<bool> m_cardMoved;
+    private TaskCompletionSource<bool> m_cardBuffed;
+    // private ModifierModel m_modi
 
     private void Awake()
     {
@@ -81,6 +83,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
         UpdateScore(model.CurrentScore);
         m_costText.text = model.CurrentCost.ToString();
+        m_scoreText.color = model.CardColor.GetColorCode();
 
         m_cardCover.SetActive(displayCardCover);
         m_maskImage.enabled = !displayCardCover;
@@ -300,5 +303,20 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         message.Initialize(Model.CurrentScore);
 
         return message;
+    }
+
+    public async Task StartBuffAnimation(ModifierModel modifier)
+    {
+        m_cardBuffed = new TaskCompletionSource<bool>();
+
+        m_animator.enabled = true;
+        m_animator.SetTrigger("Buff");
+
+        await m_cardBuffed.Task;
+    }
+
+    public void BuffCard()
+    {
+        
     }
 }

@@ -32,6 +32,7 @@ public class BattlePresenter : MonoBehaviour
         m_battleModel.RevealBoardsAsync = RevealBoardsAsync;
         m_battleModel.CalculatePointsAsync = AnimateScoreCalcualtionAsync;
         m_battleModel.WaitForReward = WaitForReward;
+        m_battleModel.BuffCards = BuffCardsAsync;
 
         m_playerScoreInitialPosition = m_playerScore.transform.localPosition;
         m_enemyScoreInitialPosition = m_enemyScore.transform.localPosition;
@@ -59,6 +60,11 @@ public class BattlePresenter : MonoBehaviour
     private async Task RevealBoardsAsync()
     {
         await Task.WhenAll(m_enemyBoardPresenter.RevealCardsAsync());
+    }
+
+    private async Task BuffCardsAsync()
+    {
+
     }
 
     private async Task AnimateScoreCalcualtionAsync()
