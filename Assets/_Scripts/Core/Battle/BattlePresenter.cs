@@ -23,6 +23,10 @@ public class BattlePresenter : MonoBehaviour
 
     [SerializeField] private GameOver m_gameOverScreen;
 
+    [SerializeField] private AudioSource m_audio;
+    [SerializeField] private List<AudioClip> m_hits;
+    [SerializeField] private List<AudioClip> m_explosions;
+
     private BattleModel m_battleModel;
 
     public void Initialize(BattleModel model)
@@ -134,6 +138,9 @@ public class BattlePresenter : MonoBehaviour
         bigger.Speed = 500;
         await bigger.GetTask();
 
+        AudioClip clip = m_explosions[Random.Range(0, m_explosions.Count)];
+        m_audio.PlayOneShot(clip);
+
         bigger.SetValue(bigger.Value - smaller.Value);
 
         smaller.Target = outOfBounds.transform.position;
@@ -144,6 +151,9 @@ public class BattlePresenter : MonoBehaviour
         bigger.Target = player > enemy ? m_enemyHealthPresenter.transform.position : m_playerHealthPresenter.transform.position;
         bigger.Speed = 1000;
         await bigger.GetTask();
+
+        clip = m_hits[Random.Range(0, m_hits.Count)];
+        m_audio.PlayOneShot(clip);
     }
 
     private async Task WaitForReward() => await m_rewardUI.GetTask();

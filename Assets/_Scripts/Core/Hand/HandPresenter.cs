@@ -30,6 +30,7 @@ public class HandPresenter : MonoBehaviour
     [SerializeField] private AudioSource m_audio;
     [SerializeField] private AudioClip m_drawCard;
     [SerializeField] private AudioClip m_playCard;
+    [SerializeField] private AudioClip m_notEnoughMana;
 
     private bool m_canPlayCards = false;
 
@@ -72,6 +73,7 @@ public class HandPresenter : MonoBehaviour
         }
         else
         {
+            m_audio.PlayOneShot(m_playCard);
             AnimateRelayout();
         }
     }
@@ -121,14 +123,16 @@ public class HandPresenter : MonoBehaviour
             return;
 
         if (m_manaModel.CurrentMana < card.Model.CurrentCost)
+        {
+            m_audio.PlayOneShot(m_notEnoughMana);
             return;
+        }
 
         card.OnCardClicked -= HandleOnCardClicked;
 
         m_manaModel.CurrentMana -= card.Model.CurrentCost;
 
         m_handModel.RemoveCard(card.Model);
-        m_audio.PlayOneShot(m_playCard);
         m_boardModel.Add(card.Model);
     }
 
