@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ada3d15309714346b8f93fb5ab32d3a, type: 3}
-  m_Name: Enemy
+  m_Name: Enemy6
   m_EditorClassIdentifier: 
   m_cardPool:
-  - {fileID: 11400000, guid: aa65b8d478340e041b2fd64f8a240c40, type: 2}
+  - {fileID: 11400000, guid: fc2d0984181e79c4ab0522b546b15655, type: 2}
   - {fileID: 11400000, guid: 0121bd3d477151f43b838e07676ce432, type: 2}
   - {fileID: 11400000, guid: cef23dda01dd47a47832a86be5f61368, type: 2}
-  - {fileID: 11400000, guid: 7e23dc2df6232e14a92250f639f6826e, type: 2}
-  m_health: 50
+  - {fileID: 11400000, guid: 40875986c90ed4744be19000726c2dca, type: 2}
+  - {fileID: 11400000, guid: 23070e9ec44abe94e8b6842610704412, type: 2}
+  - {fileID: 11400000, guid: e3f1957ed8918514aadf17b32e52ead0, type: 2}
+  - {fileID: 11400000, guid: d82453c0e9b57d54bb0148935c3c8e96, type: 2}
+  m_health: 70
   m_maxMana: 10
-  m_handSize: 3
+  m_handSize: 5

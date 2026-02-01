@@ -8,6 +8,7 @@ public class BattleModel
     private EntityModel m_player;
     private EntityModel m_currentEnemy;
     private List<EntityData> m_enemies;
+    private int m_currentEnemyIndex = 0;
 
     public event EventHandler OnTurnStarted;
     public event EventHandler OnTurnEnded;
@@ -34,8 +35,18 @@ public class BattleModel
             m_currentEnemy.Hand.Clear();
         }
 
-        EntityData data = m_enemies[UnityEngine.Random.Range(0, m_enemies.Count)];
+        EntityData data = m_enemies[m_currentEnemyIndex];
         m_currentEnemy = new EntityModel(data, false);
+
+        ++m_currentEnemyIndex;
+        if (m_currentEnemyIndex >= m_enemies.Count)
+        {
+            m_currentEnemyIndex = m_enemies.Count - 1;
+        }
+        else
+        {
+            m_player.Hand.IncreaseMaxSize();
+        }
 
         OnNewEnemy?.Invoke(this, m_currentEnemy);
         await StartTurn();
@@ -112,6 +123,8 @@ public class BattleModel
 
         if (m_currentEnemy.Health.CurrentHealth <= 0)
         {
+            m_currentEnemy.Hand.Clear();
+
             OnPlayerWon?.Invoke(this, EventArgs.Empty);
             await WaitForReward();
             await StartNewBattle();
