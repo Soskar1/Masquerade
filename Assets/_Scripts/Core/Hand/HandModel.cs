@@ -51,4 +51,6 @@ public class HandModel
             RemoveCard(model, true);
         }
     }
+
+    public void IncreaseMaxSize() => m_maxSize++;
 }

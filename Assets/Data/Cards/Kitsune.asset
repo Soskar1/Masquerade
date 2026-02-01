@@ -15,4 +15,4 @@ MonoBehaviour:
   m_maskSprite: {fileID: 21300000, guid: 3a569b00c6ddef64eb20b7d5d7ec572e, type: 3}
   m_borderSprite: {fileID: 21300000, guid: d8e03d7391b313c45ae1f2725c573086, type: 3}
   m_score: 15
-  m_cost: 1
+  m_cost: 3

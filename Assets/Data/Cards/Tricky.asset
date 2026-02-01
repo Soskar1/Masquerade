@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maskSprite: {fileID: 21300000, guid: 842a0080edca9e24287c0ec35508fe50, type: 3}
   m_borderSprite: {fileID: 21300000, guid: dc962667a032d2349a643c4cd16a257b, type: 3}
-  m_score: 10
-  m_cost: 3
+  m_score: 25
+  m_cost: 4

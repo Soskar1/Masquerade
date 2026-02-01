@@ -1894,15 +1894,30 @@ MonoBehaviour:
   m_playerPresenter: {fileID: 590847952}
   m_enemies:
   - {fileID: 11400000, guid: 54f03725fead98e4a94e55a77ceff3b2, type: 2}
+  - {fileID: 11400000, guid: e315b6e1663c7e04d973bdff93206645, type: 2}
+  - {fileID: 11400000, guid: ba23f7ebc88ce3a4e89549a9d7d730db, type: 2}
+  - {fileID: 11400000, guid: 2c10f5ee94d78d743b5f38124aacf894, type: 2}
+  - {fileID: 11400000, guid: 3855e3b1f2ac45a46931fcf11b7f341b, type: 2}
+  - {fileID: 11400000, guid: f1d660edb8fc5b84facfe89b13259cfa, type: 2}
+  - {fileID: 11400000, guid: 52a8f3b0c4201d24199b29d2aa8c3598, type: 2}
   m_enemyPresenter: {fileID: 1804066284}
   m_battlePresenter: {fileID: 1351097247}
   m_rewardUI: {fileID: 99322975}
   m_cardDatabase:
+  - {fileID: 11400000, guid: fc2d0984181e79c4ab0522b546b15655, type: 2}
+  - {fileID: 11400000, guid: 23070e9ec44abe94e8b6842610704412, type: 2}
+  - {fileID: 11400000, guid: 5a8318e39de729043833e3e0124ea470, type: 2}
   - {fileID: 11400000, guid: 0121bd3d477151f43b838e07676ce432, type: 2}
+  - {fileID: 11400000, guid: 40875986c90ed4744be19000726c2dca, type: 2}
   - {fileID: 11400000, guid: 9926624419d1e4d4fb657bdfe6e9a445, type: 2}
+  - {fileID: 11400000, guid: 58ddc712da88fc44dab7866b1ab7997c, type: 2}
+  - {fileID: 11400000, guid: d82453c0e9b57d54bb0148935c3c8e96, type: 2}
+  - {fileID: 11400000, guid: ebad17e5bff048b428411d79af11152b, type: 2}
   - {fileID: 11400000, guid: aa65b8d478340e041b2fd64f8a240c40, type: 2}
   - {fileID: 11400000, guid: cef23dda01dd47a47832a86be5f61368, type: 2}
   - {fileID: 11400000, guid: 7e23dc2df6232e14a92250f639f6826e, type: 2}
+  - {fileID: 11400000, guid: e3f1957ed8918514aadf17b32e52ead0, type: 2}
+  - {fileID: 11400000, guid: 1cedbc29546969d4494f1f79afa33cfc, type: 2}
   m_escapeMenu: {fileID: 498593154}
 --- !u!4 &1331707530
 Transform:
