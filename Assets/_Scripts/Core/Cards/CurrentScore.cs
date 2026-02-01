@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -23,6 +25,9 @@ public class CurrentScore : MonoBehaviour
 
     [SerializeField] private float m_speed = 150;
     [SerializeField] private float m_minDistance = 0.5f;
+
+    [SerializeField] private AudioSource m_audio;
+    [SerializeField] private List<AudioClip> m_textSounds;
 
     private int m_currentScore;
     private Vector3 m_targetScale;
@@ -79,6 +84,9 @@ public class CurrentScore : MonoBehaviour
     {
         m_currentScore += message.Score;
         m_text.text = m_currentScore.ToString();
+
+        AudioClip clip = m_textSounds[Random.Range(0, m_textSounds.Count)];
+        m_audio.PlayOneShot(clip);
 
         UpdateTargets();
         Destroy(message.gameObject);

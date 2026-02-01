@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 public class HandModel
 {
@@ -26,12 +27,13 @@ public class HandModel
         OnCardAdded?.Invoke(this, card);
     }
 
-    public void DrawCards()
+    public async Task DrawCards()
     {
         for (int i = m_cards.Count; i < m_maxSize; ++i)
         {
             CardModel card = m_deck.DrawCard();
             Add(card);
+            await Task.Delay(100);
         }
     }
 

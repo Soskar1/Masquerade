@@ -31,6 +31,10 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     [SerializeField] private float m_revealDuration = 2f;
 
+    [SerializeField] private AudioSource m_audio;
+    [SerializeField] private AudioClip m_revealCard;
+    [SerializeField] private List<AudioClip> m_buffs;
+
     [SerializeField] private Animator m_animator;
 
     [SerializeField] private List<CardColorBackgroundSprite> m_backgroundSprites;
@@ -289,6 +293,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         m_animator.enabled = true;
         m_animator.SetTrigger("Reveal");
+        m_audio.PlayOneShot(m_revealCard);
         
         yield return new WaitForSeconds(m_revealDuration);
 
@@ -319,6 +324,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         Model.CurrentScore = (int)(Model.CurrentScore * (1 + (float)m_currentModificiator.Percentage / 100));
         m_currentModificiator = null;
+
+        AudioClip clip = m_buffs[UnityEngine.Random.Range(0, m_buffs.Count)];
+        m_audio.PlayOneShot(clip);
     }
 
     public void BuffAnimationEnd()

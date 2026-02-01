@@ -60,8 +60,8 @@ public class BattleModel
         m_player.Board.Clear();
         m_currentEnemy.Board.Clear();
 
-        m_player.Hand.DrawCards();
-        m_currentEnemy.Hand.DrawCards();
+        await m_player.Hand.DrawCards();
+        await m_currentEnemy.Hand.DrawCards();
 
         List<CardModel> enemyCards = EnemyPickCards();
 
