@@ -34,7 +34,7 @@ public class ManaPresenter : MonoBehaviour
         for (int i = 0; i < currentMana; ++i)
             m_currentMana[i].gameObject.SetActive(true);
 
-        for (int i = currentMana; i < maxMana; ++i)
+        for (int i = currentMana; i < 10; ++i)
             m_currentMana[i].gameObject.SetActive(false);
     }
 }
