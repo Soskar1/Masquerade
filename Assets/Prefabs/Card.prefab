@@ -649,7 +649,7 @@ MonoBehaviour:
   - m_color: 3
     m_texture: {fileID: 2800000, guid: 0a1c1212e53eafc4980f6770fefddb7d, type: 3}
   - m_color: 2
-    m_sprite: {fileID: 21300000, guid: 2d155e976a88b1e47b13282bb7e7d2d3, type: 3}
+    m_texture: {fileID: 2800000, guid: 2d155e976a88b1e47b13282bb7e7d2d3, type: 3}
 --- !u!95 &371002264762179209
 Animator:
   serializedVersion: 7
