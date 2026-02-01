@@ -167,7 +167,8 @@ public class BoardPresenter : MonoBehaviour
         {
             if (cards[i].Model.CardColor == modifier.CardColor)
             {
-                // cards[i].Model.CurrentScore = (int)(cards[i].Model.CurrentScore * ((1 + (float)(modifier.Percentage)) / 100));
+                await cards[i].StartBuffAnimation(modifier);
+                await Task.Delay(50);
             }
         }
     }

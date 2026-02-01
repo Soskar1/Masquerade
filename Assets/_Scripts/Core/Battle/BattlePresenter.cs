@@ -40,7 +40,7 @@ public class BattlePresenter : MonoBehaviour
 
     private void HandleOnPlayerWon(object sender, System.EventArgs e)
     {
-        m_rewardUI.gameObject.SetActive(true);
+        m_rewardUI.Appear();
     }
 
     private void OnDisable()
@@ -64,7 +64,10 @@ public class BattlePresenter : MonoBehaviour
 
     private async Task BuffCardsAsync()
     {
+        Task player = m_playerBoardPresenter.BuffBoard();
+        Task enemy = m_enemyBoardPresenter.BuffBoard();
 
+        await Task.WhenAll(new[] { player, enemy });
     }
 
     private async Task AnimateScoreCalcualtionAsync()
