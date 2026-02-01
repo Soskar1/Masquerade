@@ -2032,7 +2032,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1664c965612574db8c350d9aaabf72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerData: {fileID: 11400000, guid: d5ab4a1108977974389d55eee8e8e53e, type: 2}
+  m_playerData:
+  - {fileID: 11400000, guid: d5ab4a1108977974389d55eee8e8e53e, type: 2}
+  - {fileID: 11400000, guid: 6837d51ad70466f47aa0cadd3e9e4d32, type: 2}
+  - {fileID: 11400000, guid: 68bc4e0c15cab1e499490c2af5ae40f9, type: 2}
   m_playerPresenter: {fileID: 590847952}
   m_enemies:
   - {fileID: 11400000, guid: 54f03725fead98e4a94e55a77ceff3b2, type: 2}
@@ -3210,6 +3213,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325318485}
     m_Modifications:
+    - target: {fileID: 658221016573012679, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -2.812
+      objectReference: {fileID: 0}
+    - target: {fileID: 658221016573012679, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 838174447837502513, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 307
@@ -3977,6 +3988,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325318485}
     m_Modifications:
+    - target: {fileID: 658221016573012679, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 102.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5593531923090220604, guid: 4a83389fb84299c42a4878bfb628ab3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

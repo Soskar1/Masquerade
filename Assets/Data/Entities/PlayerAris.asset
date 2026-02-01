@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ada3d15309714346b8f93fb5ab32d3a, type: 3}
-  m_Name: Player
+  m_Name: PlayerAris
   m_EditorClassIdentifier: 
   m_cardPool:
   - {fileID: 11400000, guid: aa65b8d478340e041b2fd64f8a240c40, type: 2}
@@ -20,4 +20,4 @@ MonoBehaviour:
   m_health: 100
   m_maxMana: 10
   m_handSize: 3
-  m_portrait: {fileID: 0}
+  m_portrait: {fileID: 21300000, guid: a28c4f91a6aef6941bf8e58210522b7a, type: 3}
