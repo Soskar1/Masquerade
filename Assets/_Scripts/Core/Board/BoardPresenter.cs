@@ -162,18 +162,14 @@ public class BoardPresenter : MonoBehaviour
     private async Task BuffColorCards(ModifierModel modifier)
     {
         var cards = m_cardToPlaceholder.Keys.ToList();
-        List<Task> tasks = new List<Task>(cards.Count);
 
         for (int i = 0; i < cards.Count; i++)
         {
             if (cards[i].Model.CardColor == modifier.CardColor)
             {
-                Task task = cards[i].StartBuffAnimation(modifier);
-                tasks.Add(task);
+                await cards[i].StartBuffAnimation(modifier);
                 await Task.Delay(50);
             }
         }
-
-        await Task.WhenAll(tasks);
     }
 }

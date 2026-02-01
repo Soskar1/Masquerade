@@ -309,14 +309,14 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_cardBuffed = new TaskCompletionSource<bool>();
 
         m_animator.enabled = true;
-        m_animator.SetTrigger("Buff");
+        //m_animator.SetTrigger("Buff");
+        m_animator.Play("Buff", 0, 0);
 
         await m_cardBuffed.Task;
     }
 
     public void BuffCard()
     {
-        m_animator.ResetTrigger("Buff");
         Model.CurrentScore = (int)(Model.CurrentScore * (1 + (float)m_currentModificiator.Percentage / 100));
         m_currentModificiator = null;
     }

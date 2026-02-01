@@ -37,6 +37,13 @@ public class RewardUI : MonoBehaviour
         m_cards = new List<CardPresenter>();
     }
 
+    public void Appear()
+    {
+        gameObject.SetActive(true);
+        m_animator.enabled = true;
+        m_animator.Play("Appear", 0, 0);
+    }
+
     public async Task DisplayCards()
     {
         m_animator.enabled = false;
