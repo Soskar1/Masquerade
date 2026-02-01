@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bootstrap : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private EntityData m_playerData;
+    [SerializeField] private List<EntityData> m_playerData;
     [SerializeField] private EntityPresenter m_playerPresenter;
 
     [Header("Enemy")]
@@ -27,7 +27,8 @@ public class Bootstrap : MonoBehaviour
         m_controls.Enable();
         m_controls.Player.Escape.performed += Escape_performed;
 
-        EntityModel player = new EntityModel(m_playerData, true);
+        EntityData randomData = m_playerData[Random.Range(0, m_playerData.Count)];
+        EntityModel player = new EntityModel(randomData, true);
         BattleModel battle = new BattleModel(player, m_enemies);
 
         m_playerPresenter.Initialize(player, battle);
