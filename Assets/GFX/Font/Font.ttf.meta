@@ -11,8 +11,8 @@ TrueTypeFontImporter:
   fontNames:
   - Mystery Font
   fallbackFontReferences: []
-  customCharacters: 
-  fontRenderingMode: 0
+  customCharacters: +0123456789
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
