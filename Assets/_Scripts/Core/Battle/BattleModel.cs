@@ -12,6 +12,7 @@ public class BattleModel
     public event EventHandler OnTurnStarted;
     public event EventHandler OnTurnEnded;
     public event EventHandler OnPlayerWon;
+    public event EventHandler OnEnemyWon;
     public event EventHandler<EntityModel> OnNewEnemy;
 
     public Func<Task> RevealBoardsAsync { get; set; }
@@ -114,6 +115,10 @@ public class BattleModel
             OnPlayerWon?.Invoke(this, EventArgs.Empty);
             await WaitForReward();
             await StartNewBattle();
+        }
+        else if (m_player.Health.CurrentHealth <= 0)
+        {
+            OnEnemyWon?.Invoke(this, EventArgs.Empty);
         }
         else
         {

@@ -21,6 +21,8 @@ public class BattlePresenter : MonoBehaviour
     [SerializeField] private HealthPresenter m_playerHealthPresenter;
     [SerializeField] private HealthPresenter m_enemyHealthPresenter;
 
+    [SerializeField] private GameOver m_gameOverScreen;
+
     private BattleModel m_battleModel;
 
     public void Initialize(BattleModel model)
@@ -28,6 +30,7 @@ public class BattlePresenter : MonoBehaviour
         m_battleModel = model;
         m_battleModel.OnTurnStarted += HandleOnTurnStarted;
         m_battleModel.OnPlayerWon += HandleOnPlayerWon;
+        m_battleModel.OnEnemyWon += HandleOnEnemyWon;
 
         m_battleModel.RevealBoardsAsync = RevealBoardsAsync;
         m_battleModel.CalculatePointsAsync = AnimateScoreCalcualtionAsync;
@@ -36,6 +39,11 @@ public class BattlePresenter : MonoBehaviour
 
         m_playerScoreInitialPosition = m_playerScore.transform.localPosition;
         m_enemyScoreInitialPosition = m_enemyScore.transform.localPosition;
+    }
+
+    private void HandleOnEnemyWon(object sender, System.EventArgs e)
+    {
+        m_gameOverScreen.gameObject.SetActive(true);
     }
 
     private void HandleOnPlayerWon(object sender, System.EventArgs e)
@@ -47,6 +55,7 @@ public class BattlePresenter : MonoBehaviour
     {
         m_battleModel.OnTurnStarted -= HandleOnTurnStarted;
         m_battleModel.OnPlayerWon -= HandleOnPlayerWon;
+        m_battleModel.OnEnemyWon -= HandleOnEnemyWon;
     }
 
     private void HandleOnTurnStarted(object sender, System.EventArgs e) => m_endTurnButton.interactable = true;
