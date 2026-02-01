@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -19,6 +18,9 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private TextMeshProUGUI m_costText;
 
     [SerializeField] private ScoreMessage m_scoreMessagePrefab;
+
+    [SerializeField] private Transform m_modifierParent;
+    [SerializeField] private ModifierPresenter m_modiferPrefab;
 
     [Header("Hover Settings")]
     [SerializeField] private float m_hoverScaleMultiplier = 1.2f;
@@ -59,6 +61,8 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public event EventHandler<CardPresenter> OnCardClicked;
 
     private TaskCompletionSource<bool> m_cardMoved;
+    private TaskCompletionSource<bool> m_cardBuffed;
+    // private ModifierModel m_modi
 
     private void Awake()
     {
@@ -79,6 +83,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_backgroundImage.sprite = m_backgroundSpritesDict[model.CardColor].Sprite;
         UpdateScore(model.CurrentScore);
         m_costText.text = model.CurrentCost.ToString();
+        m_scoreText.color = model.CardColor.GetColorCode();
 
         m_cardCover.SetActive(displayCardCover);
         m_maskImage.enabled = !displayCardCover;
@@ -87,6 +92,12 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         m_costText.transform.parent.gameObject.SetActive(!displayCardCover);
 
         m_baseLocalScale = transform.localScale;
+
+        foreach (var modifer in model.Modifiers)
+        {
+            ModifierPresenter modifierPresenter = Instantiate(m_modiferPrefab, m_modifierParent);
+            modifierPresenter.Initialize(modifer);
+        }
 
         m_model.OnScoreChanged += HandleOnScoreChanged;
         m_model.OnCostChanged += HandleOnCostChanged;
@@ -292,5 +303,20 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         message.Initialize(Model.CurrentScore);
 
         return message;
+    }
+
+    public async Task StartBuffAnimation(ModifierModel modifier)
+    {
+        m_cardBuffed = new TaskCompletionSource<bool>();
+
+        m_animator.enabled = true;
+        m_animator.SetTrigger("Buff");
+
+        await m_cardBuffed.Task;
+    }
+
+    public void BuffCard()
+    {
+        
     }
 }

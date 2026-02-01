@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8d8a067c6687b554c8a9662dc0ad19f4
+guid: 3efa9ab4fa4238a408b204eaf2fbd417
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6033287472932150496
-    second: MasqueradeModifiers_0001s_0001s_0003_BackgroundMediumRed_0
+      213: -1390671825432266103
+    second: ModifierBorder_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MasqueradeModifiers_0001s_0001s_0003_BackgroundMediumRed_0
+      name: ModifierBorder_0
       rect:
         serializedVersion: 2
-        x: 11
+        x: 0
         y: 0
-        width: 21
-        height: 13
+        width: 22
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 023a0145205754ca0800000000000000
-      internalID: -6033287472932150496
+      spriteID: 98a37f5c75753bce0800000000000000
+      internalID: -1390671825432266103
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MasqueradeModifiers_0001s_0001s_0003_BackgroundMediumRed_0: -6033287472932150496
+      ModifierBorder_0: -1390671825432266103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

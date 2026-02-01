@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.GPUSort;
 
 public class BoardPresenter : MonoBehaviour
 {
@@ -134,9 +136,39 @@ public class BoardPresenter : MonoBehaviour
         for (int i = 0; i < cards.Count; i++)
         {
             tasks.Add(cards[i].RevealAsync());
-            // await Task.Delay((int)(m_revealStagger * 1000f)); // stagger start
         }
 
         await Task.WhenAll(tasks);
+    }
+
+    public async Task BuffBoard()
+    {
+        var cards = m_cardToPlaceholder.Keys.ToList();
+
+        for (int i = 0; i < cards.Count ; i++)
+        {
+            CardPresenter card = cards[i];
+
+            if (card.Model.Modifiers.Count > 0)
+            {
+                foreach (var modifier in card.Model.Modifiers)
+                {
+                    await BuffColorCards(modifier);
+                }
+            }
+        }
+    }
+
+    private async Task BuffColorCards(ModifierModel modifier)
+    {
+        var cards = m_cardToPlaceholder.Keys.ToList();
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards[i].Model.CardColor == modifier.CardColor)
+            {
+                // cards[i].Model.CurrentScore = (int)(cards[i].Model.CurrentScore * ((1 + (float)(modifier.Percentage)) / 100));
+            }
+        }
     }
 }

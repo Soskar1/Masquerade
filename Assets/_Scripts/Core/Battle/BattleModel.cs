@@ -17,6 +17,7 @@ public class BattleModel
     public Func<Task> RevealBoardsAsync { get; set; }
     public Func<Task> CalculatePointsAsync { get; set; }
     public Func<Task> WaitForReward { get; set; }
+    public Func<Task> BuffCards { get; set; }
 
     public BattleModel(EntityModel player, List<EntityData> enemies)
     {
@@ -87,17 +88,16 @@ public class BattleModel
 
     public async Task EndTurn()
     {
-        // 1) Run reveal animation and wait
         if (RevealBoardsAsync != null)
             await RevealBoardsAsync();
 
-        // 2) Calculate score
+        // await BuffCards?.Invoke();
+
         int playerScore = CalculateScore(m_player.Board);
         int enemyScore = CalculateScore(m_currentEnemy.Board);
 
         await CalculatePointsAsync?.Invoke();
 
-        // 3) Deal damage
         int diff = Mathf.Abs(playerScore - enemyScore);
         if (diff > 0)
         {
