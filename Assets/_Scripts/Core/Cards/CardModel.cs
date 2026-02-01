@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 
 public class CardModel
 {
     public CardData CardData { get; private set; }
     public CardColor CardColor { get; private set; }
+    public List<ModifierModel> Modifiers { get; private set; }
 
     private int m_currentScore;
     public int CurrentScore
@@ -34,12 +36,13 @@ public class CardModel
     public event EventHandler<int> OnScoreChanged;
     public event EventHandler<int> OnCostChanged;
 
-    public CardModel(CardData data, CardColor cardColor)
+    public CardModel(CardData data, CardColor cardColor, List<ModifierModel> modifiers)
     {
         CardData = data;
         CurrentScore = data.Score;
         CurrentCost = data.Cost;
 
         CardColor = cardColor;
+        Modifiers = modifiers;
     }
 }

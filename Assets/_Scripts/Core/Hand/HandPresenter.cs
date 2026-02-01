@@ -27,6 +27,11 @@ public class HandPresenter : MonoBehaviour
     private bool m_reactToMouseInput;
     private bool m_isHoverAnimationEnabled;
 
+    [SerializeField] private AudioSource m_audio;
+    [SerializeField] private AudioClip m_drawCard;
+    [SerializeField] private AudioClip m_playCard;
+    [SerializeField] private AudioClip m_notEnoughMana;
+
     private bool m_canPlayCards = false;
 
     public void Initialize(HandModel model, BoardModel boardModel, ManaModel manaModel, BattleModel battleModel, bool hideCards = false, bool reactToMouseInput = true, bool isHoverAnimationEnabled = false)
@@ -56,17 +61,29 @@ public class HandPresenter : MonoBehaviour
         m_canPlayCards = false;
     }
 
-    private void HandleOnCardRemoved(object sender, CardModel card)
+    private void HandleOnCardRemoved(object sender, OnCardRemovedEventArgs args)
     {
-        m_handModel.OnCardAdded -= HandleOnCardRemoved;
-
-        CardPresenterRegistry.TryGet(card, out CardPresenter presenter);
+        CardPresenterRegistry.TryGet(args.CardModel, out CardPresenter presenter);
         m_cardsInHand.Remove(presenter);
 
-        AnimateRelayout();
+        if (args.DeleteFromGame)
+        {
+            CardPresenterRegistry.Unregister(args.CardModel);
+            GameObject.Destroy(presenter.gameObject);
+        }
+        else
+        {
+            m_audio.PlayOneShot(m_playCard);
+            AnimateRelayout();
+        }
     }
 
     private void OnDisable()
+    {
+        Disable();
+    }
+
+    public void Disable()
     {
         m_handModel.OnCardAdded -= HandleOnCardAdded;
         m_handModel.OnCardRemoved -= HandleOnCardRemoved;
@@ -95,6 +112,8 @@ public class HandPresenter : MonoBehaviour
         m_cardsInHand.Add(presenter);
         presenter.OnCardClicked += HandleOnCardClicked;
 
+        m_audio.PlayOneShot(m_drawCard);
+
         AnimateRelayout();
     }
 
@@ -104,7 +123,10 @@ public class HandPresenter : MonoBehaviour
             return;
 
         if (m_manaModel.CurrentMana < card.Model.CurrentCost)
+        {
+            m_audio.PlayOneShot(m_notEnoughMana);
             return;
+        }
 
         card.OnCardClicked -= HandleOnCardClicked;
 

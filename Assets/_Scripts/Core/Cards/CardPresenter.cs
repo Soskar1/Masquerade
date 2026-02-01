@@ -28,7 +28,11 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private float m_hoverDuration = 0.15f;
     [SerializeField] private float m_maxLocalY = 120f;
 
-    [SerializeField] private float m_revealDuration = 4f;
+    [SerializeField] private float m_revealDuration = 2f;
+
+    [SerializeField] private AudioSource m_audio;
+    [SerializeField] private AudioClip m_revealCard;
+    [SerializeField] private List<AudioClip> m_buffs;
 
     [SerializeField] private Animator m_animator;
 
@@ -62,7 +66,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private TaskCompletionSource<bool> m_cardMoved;
     private TaskCompletionSource<bool> m_cardBuffed;
-    // private ModifierModel m_modi
+    private ModifierModel m_currentModificiator;
 
     private void Awake()
     {
@@ -291,6 +295,7 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         m_animator.enabled = true;
         m_animator.SetTrigger("Reveal");
+        m_audio.PlayOneShot(m_revealCard);
         
         yield return new WaitForSeconds(m_revealDuration);
 
@@ -307,16 +312,28 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public async Task StartBuffAnimation(ModifierModel modifier)
     {
+        m_currentModificiator = modifier;
         m_cardBuffed = new TaskCompletionSource<bool>();
 
         m_animator.enabled = true;
-        m_animator.SetTrigger("Buff");
+        //m_animator.SetTrigger("Buff");
+        m_animator.Play("Buff", 0, 0);
 
         await m_cardBuffed.Task;
     }
 
     public void BuffCard()
     {
-        
+        Model.CurrentScore = (int)(Model.CurrentScore * (1 + (float)m_currentModificiator.Percentage / 100));
+        m_currentModificiator = null;
+
+        AudioClip clip = m_buffs[UnityEngine.Random.Range(0, m_buffs.Count)];
+        m_audio.PlayOneShot(clip);
+    }
+
+    public void BuffAnimationEnd()
+    {
+        m_cardBuffed.SetResult(true);
+        m_animator.enabled = false;
     }
 }

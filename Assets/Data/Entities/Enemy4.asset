@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ada3d15309714346b8f93fb5ab32d3a, type: 3}
+  m_Name: Enemy4
+  m_EditorClassIdentifier: 
+  m_cardPool:
+  - {fileID: 11400000, guid: aa65b8d478340e041b2fd64f8a240c40, type: 2}
+  - {fileID: 11400000, guid: 0121bd3d477151f43b838e07676ce432, type: 2}
+  - {fileID: 11400000, guid: cef23dda01dd47a47832a86be5f61368, type: 2}
+  - {fileID: 11400000, guid: 40875986c90ed4744be19000726c2dca, type: 2}
+  - {fileID: 11400000, guid: 23070e9ec44abe94e8b6842610704412, type: 2}
+  - {fileID: 11400000, guid: e3f1957ed8918514aadf17b32e52ead0, type: 2}
+  m_health: 60
+  m_maxMana: 9
+  m_handSize: 4

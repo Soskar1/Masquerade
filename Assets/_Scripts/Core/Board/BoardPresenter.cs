@@ -1,12 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.GPUSort;
 
 public class BoardPresenter : MonoBehaviour
 {
     [SerializeField] private RectTransform m_placeholderParent;
     [SerializeField] private CardPresenter m_ghostCardPrefab;
     [SerializeField] private float m_cardMovementDuration;
+
+    [SerializeField] private float m_revealStagger = 0.05f;
 
     private Dictionary<CardPresenter, CardPresenter> m_cardToPlaceholder;
 
@@ -15,6 +21,9 @@ public class BoardPresenter : MonoBehaviour
     private HandModel m_hand;
     private ManaModel m_mana;
     private BattleModel m_battle;
+
+    public BoardModel BoardModel => m_board;
+    public List<CardPresenter> Cards => m_cardToPlaceholder.Keys.ToList();
 
     private bool m_canInteractWithCards = false;
 
@@ -38,15 +47,20 @@ public class BoardPresenter : MonoBehaviour
         m_canInteractWithCards = true;
     }
 
-    private void HandleOnTurnEnded(object sender, System.EventArgs e)
+    private async void HandleOnTurnEnded(object sender, System.EventArgs e)
     {
         m_canInteractWithCards = false;
 
         if (!m_entity.IsPlayer)
-            Reveal();
+            await RevealCardsAsync();
     }
 
     private void OnDisable()
+    {
+        Disable();
+    }
+
+    public void Disable()
     {
         m_board.OnCardAdded -= HandleOnCardAdded;
         m_board.OnCardRemoved -= HandleOnCardRemoved;
@@ -114,9 +128,48 @@ public class BoardPresenter : MonoBehaviour
         }
     }
 
-    public void Reveal()
+    public async Task RevealCardsAsync()
     {
-        foreach (CardPresenter card in m_cardToPlaceholder.Keys)
-            card.Reveal();
+        var cards = m_cardToPlaceholder.Keys.ToList();
+        var tasks = new List<Task>(cards.Count);
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            tasks.Add(cards[i].RevealAsync());
+        }
+
+        await Task.WhenAll(tasks);
+    }
+
+    public async Task BuffBoard()
+    {
+        var cards = m_cardToPlaceholder.Keys.ToList();
+
+        for (int i = 0; i < cards.Count ; i++)
+        {
+            CardPresenter card = cards[i];
+
+            if (card.Model.Modifiers.Count > 0)
+            {
+                foreach (var modifier in card.Model.Modifiers)
+                {
+                    await BuffColorCards(modifier);
+                }
+            }
+        }
+    }
+
+    private async Task BuffColorCards(ModifierModel modifier)
+    {
+        var cards = m_cardToPlaceholder.Keys.ToList();
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards[i].Model.CardColor == modifier.CardColor)
+            {
+                await cards[i].StartBuffAnimation(modifier);
+                await Task.Delay(50);
+            }
+        }
     }
 }
