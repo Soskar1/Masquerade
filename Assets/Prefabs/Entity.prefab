@@ -231,6 +231,7 @@ MonoBehaviour:
   m_relayoutDuration: 0.2
   m_audio: {fileID: 1235622033720088111}
   m_drawCard: {fileID: 8300000, guid: 05f8f3ca109409a42b1232b0218b07f7, type: 3}
+  m_playCard: {fileID: 8300000, guid: 2f6c200f242bbb04b9dc748e5bb8df2d, type: 3}
 --- !u!82 &1235622033720088111
 AudioSource:
   m_ObjectHideFlags: 0

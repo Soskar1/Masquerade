@@ -29,6 +29,7 @@ public class HandPresenter : MonoBehaviour
 
     [SerializeField] private AudioSource m_audio;
     [SerializeField] private AudioClip m_drawCard;
+    [SerializeField] private AudioClip m_playCard;
 
     private bool m_canPlayCards = false;
 
@@ -127,6 +128,7 @@ public class HandPresenter : MonoBehaviour
         m_manaModel.CurrentMana -= card.Model.CurrentCost;
 
         m_handModel.RemoveCard(card.Model);
+        m_audio.PlayOneShot(m_playCard);
         m_boardModel.Add(card.Model);
     }
 
