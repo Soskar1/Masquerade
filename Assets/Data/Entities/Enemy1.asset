@@ -20,3 +20,4 @@ MonoBehaviour:
   m_health: 50
   m_maxMana: 6
   m_handSize: 3
+  m_portrait: {fileID: 0}
