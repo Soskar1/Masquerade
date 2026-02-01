@@ -100,6 +100,8 @@ public class BattleModel
 
     public async Task EndTurn()
     {
+        OnTurnEnded?.Invoke(this, EventArgs.Empty);
+
         if (RevealBoardsAsync != null)
             await RevealBoardsAsync();
 
@@ -118,8 +120,6 @@ public class BattleModel
             else
                 m_player.Health.CurrentHealth -= diff;
         }
-
-        OnTurnEnded?.Invoke(this, EventArgs.Empty);
 
         if (m_currentEnemy.Health.CurrentHealth <= 0)
         {
