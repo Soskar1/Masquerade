@@ -60,14 +60,14 @@ public class BattleModel
         m_player.Board.Clear();
         m_currentEnemy.Board.Clear();
 
-        await m_player.Hand.DrawCards();
-        await m_currentEnemy.Hand.DrawCards();
+        m_player.Hand.DrawCards();
+        m_currentEnemy.Hand.DrawCards();
 
         List<CardModel> enemyCards = EnemyPickCards();
 
         foreach (CardModel card in enemyCards)
         {
-            await Task.Run(() => Task.Delay(150));
+            // await Task.Run(() => Task.Delay(150));
             m_currentEnemy.Hand.RemoveCard(card);
             m_currentEnemy.Board.Add(card);
         }
@@ -105,7 +105,8 @@ public class BattleModel
         if (RevealBoardsAsync != null)
             await RevealBoardsAsync();
 
-        await BuffCards?.Invoke();
+        if (BuffCards != null)
+            await BuffCards();
 
         int playerScore = CalculateScore(m_player.Board);
         int enemyScore = CalculateScore(m_currentEnemy.Board);

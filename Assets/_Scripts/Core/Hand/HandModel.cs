@@ -27,13 +27,13 @@ public class HandModel
         OnCardAdded?.Invoke(this, card);
     }
 
-    public async Task DrawCards()
+    public void DrawCards()
     {
         for (int i = m_cards.Count; i < m_maxSize; ++i)
         {
             CardModel card = m_deck.DrawCard();
             Add(card);
-            await Task.Delay(100);
+            // await Task.Delay(100);
         }
     }
 

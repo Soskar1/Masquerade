@@ -168,7 +168,7 @@ public class BoardPresenter : MonoBehaviour
             if (cards[i].Model.CardColor == modifier.CardColor)
             {
                 await cards[i].StartBuffAnimation(modifier);
-                await Task.Delay(50);
+                // await Task.Delay(50);
             }
         }
     }

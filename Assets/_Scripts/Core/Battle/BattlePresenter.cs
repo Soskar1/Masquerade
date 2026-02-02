@@ -118,7 +118,7 @@ public class BattlePresenter : MonoBehaviour
 
     private async Task AnimateScoreClashAsync()
     {
-        await Task.Delay(500);
+        // await Task.Delay(500);
         int player = m_playerScore.Value;
         int enemy = m_enemyScore.Value;
 

@@ -366,6 +366,5 @@ public class CardPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void BuffAnimationEnd()
     {
         m_cardBuffed.SetResult(true);
-        m_animator.enabled = false;
     }
 }
